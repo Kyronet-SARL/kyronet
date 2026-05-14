@@ -79,6 +79,10 @@
     "titleLine1": "Réalisations",
     "titleLine2": "sélectionnées",
     "viewProject": "Voir le projet",
+    "linkSoon": "Lien public à venir",
+    "prev": "Réalisation précédente",
+    "next": "Réalisation suivante",
+    "goToSlide": "Aller à la réalisation {{n}}",
     "items": [
       {
         "title": "HOOM",

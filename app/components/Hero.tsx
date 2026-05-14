@@ -10,19 +10,19 @@ export default function Hero() {
       id="home"
       className="relative h-screen w-full overflow-hidden flex items-center justify-center"
     >
-      <div className="absolute inset-0 z-0">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="pointer-events-none h-full w-full object-cover"
         >
           <source src={bgback} type="video/mp4" />
           {t("hero.videoFallback")}
         </video>
 
-        <div className="absolute inset-0  "></div>
+        <div className="pointer-events-none absolute inset-0" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 text-center">

@@ -9,7 +9,7 @@ export default function Contact() {
       id="contact"
       className="relative p-5 rounded-t-[5rem] bg-black text-white overflow-hidden"
     >
-      <div className="absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-[-180px] left-[-180px] w-[600px] h-[600px] bg-white/5 rounded-full blur-[180px]" />
 
         <div className="absolute bottom-[-180px] right-[-180px] w-[700px] h-[700px] bg-blue-500/10 rounded-full blur-[200px]" />
@@ -17,7 +17,7 @@ export default function Contact() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-[220px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-24 items-start">
           <div>
             <span className="uppercase tracking-[0.35em] text-xs text-white/50">
@@ -97,7 +97,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-white text-black py-4 rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2"
+                className="w-full cursor-pointer bg-white text-black py-4 rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2"
               >
                 {t("contact.submit")}
                 <Send className="w-4 h-4" />

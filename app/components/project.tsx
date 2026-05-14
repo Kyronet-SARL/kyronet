@@ -13,45 +13,60 @@ const projectExtras = [
 
 function Project() {
   const { t } = useTranslation("common");
-  const copyItems = t("project.items", { returnObjects: true }) as ProjectCopy[];
-  const projects = copyItems.map((c, i) => ({
-    ...c,
-    ...projectExtras[i],
-  }));
+  const rawItems = t("project.items", { returnObjects: true });
+  const copyItems: ProjectCopy[] = Array.isArray(rawItems)
+    ? (rawItems as ProjectCopy[])
+    : [];
+
+  /** Toujours une entrée par carte (image + année) : les textes viennent des locales quand présents. */
+  const projects = projectExtras.map((extra, i) => {
+    const copy = copyItems[i];
+    return {
+      title: copy?.title ?? "",
+      category: copy?.category ?? "",
+      description: copy?.description ?? "",
+      ...extra,
+    };
+  });
 
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef<number | null>(null);
 
+  const count = projects.length;
+  const safeCount = count > 0 ? count : 1;
+
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % projects.length);
+    setCurrent((prev) => (prev + 1) % safeCount);
   };
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+    setCurrent((prev) => (prev === 0 ? safeCount - 1 : prev - 1));
   };
 
   useEffect(() => {
+    if (count < 2) return;
+
     timeoutRef.current = window.setTimeout(() => {
-      nextSlide();
+      setCurrent((prev) => (prev + 1) % safeCount);
     }, 6000);
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [current, projects.length]);
+  }, [current, count, safeCount]);
 
   return (
     <section
       id="projects"
-      className="relative py-32 bg-white text-black overflow-hidden"
+      className="relative py-32 bg-white text-black overflow-x-clip"
     >
-      <div className="absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-black/5 rounded-full blur-[140px]" />
         <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] bg-black/5 rounded-full blur-[160px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-black/5 rounded-full blur-[200px]" />
       </div>
 
-      <div className="text-center max-w-4xl mx-auto mb-24 px-6">
+      <div className="relative z-10 text-center max-w-4xl mx-auto mb-24 px-6">
         <span className="uppercase tracking-[0.35em] text-xs text-black/50">
           {t("project.eyebrow")}
         </span>
@@ -63,21 +78,23 @@ function Project() {
         </h2>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="overflow-hidden rounded-[2rem]">
           <div
             className="flex transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{
-              transform: `translateX(-${current * 100}%)`,
+              width: `${safeCount * 100}%`,
+              transform: `translateX(-${(current * 100) / safeCount}%)`,
             }}
           >
             {projects.map((p, i) => (
               <div
                 key={i}
-                className="min-w-full flex flex-col lg:flex-row items-center gap-14 lg:gap-24"
+                className="box-border min-w-0 shrink-0 flex flex-col lg:flex-row items-center gap-14 lg:gap-24"
+                style={{ width: `${100 / safeCount}%` }}
               >
                 <div className="relative flex-1 w-full">
-                  <div className="absolute inset-0 bg-black/5 blur-[120px] rounded-full scale-110 -z-10" />
+                  <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-black/5 blur-[120px] scale-110" />
 
                   <div className="overflow-hidden rounded-[2rem]">
                     <img
@@ -94,7 +111,7 @@ function Project() {
                   </div>
                 </div>
 
-                <div className="flex-1">
+                <div className="relative z-10 flex-1">
                   <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-black/40 uppercase">
                     <span>{p.category}</span>
 
@@ -116,19 +133,23 @@ function Project() {
                       href={p.lien}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative inline-flex flex-col items-start py-5 overflow-hidden"
+                      className="group relative z-10 mt-6 inline-flex flex-col items-start py-2 text-black no-underline"
                     >
-                      <span className="text-sm font-extralight leading-[1.05] tracking-[0.18em] uppercase text-black/70 transition-all duration-500 group-hover:text-black">
+                      <span className="text-sm font-medium uppercase tracking-[0.18em] text-black underline decoration-black/30 underline-offset-4 transition group-hover:decoration-black">
                         {t("project.viewProject")}
                       </span>
 
-                      <div className="relative mt-3 h-[1px] w-20 overflow-hidden bg-black/10">
+                      <div className="relative mt-3 h-px w-20 overflow-hidden bg-black/15">
                         <div className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
                       </div>
 
-                      <div className="absolute -bottom-2 left-0 h-10 w-24 bg-black/[0.03] blur-2xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                      <div className="pointer-events-none absolute -bottom-2 left-0 h-10 w-24 bg-black/[0.03] blur-2xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                     </a>
-                  ) : null}
+                  ) : (
+                    <p className="relative z-10 mt-6 text-sm font-medium uppercase tracking-[0.18em] text-black/45">
+                      {t("project.linkSoon")}
+                    </p>
+                  )}
 
                   <div className="mt-10 w-20 h-[1px] bg-black/20"></div>
                 </div>
@@ -137,52 +158,43 @@ function Project() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-14">
-          <div className="flex items-center gap-4">
+        <div className="relative z-50 isolate mt-14 flex pointer-events-auto touch-manipulation items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
             <button
               type="button"
+              aria-label={t("project.prev")}
               onClick={prevSlide}
-              className="
-                w-14 h-14 rounded-full
-                border border-black/10
-                flex items-center justify-center
-                hover:bg-black hover:text-white
-                transition-all duration-500
-              "
+              className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={18} aria-hidden />
             </button>
 
             <button
               type="button"
+              aria-label={t("project.next")}
               onClick={nextSlide}
-              className="
-                w-14 h-14 rounded-full
-                border border-black/10
-                flex items-center justify-center
-                hover:bg-black hover:text-white
-                transition-all duration-500
-              "
+              className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={18} aria-hidden />
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-end gap-2">
             {projects.map((_, i) => (
               <button
                 type="button"
                 key={i}
+                aria-label={t("project.goToSlide", { n: i + 1 })}
+                aria-pressed={current === i}
                 onClick={() => setCurrent(i)}
-                className={`
-                  transition-all duration-500 rounded-full
-                  ${
-                    current === i
-                      ? "w-14 h-[3px] bg-black"
-                      : "w-6 h-[3px] bg-black/20 hover:bg-black/40"
-                  }
-                `}
-              />
+                className="flex h-11 min-w-11 cursor-pointer items-center justify-center p-2"
+              >
+                <span
+                  className={`block h-[3px] rounded-full transition-all duration-500 ${
+                    current === i ? "w-12 bg-black" : "w-6 bg-black/25 hover:bg-black/45"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

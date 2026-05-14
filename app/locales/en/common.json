@@ -79,6 +79,10 @@
     "titleLine1": "Selected",
     "titleLine2": "work",
     "viewProject": "View project",
+    "linkSoon": "Public link coming soon",
+    "prev": "Previous project",
+    "next": "Next project",
+    "goToSlide": "Go to project {{n}}",
     "items": [
       {
         "title": "HOOM",

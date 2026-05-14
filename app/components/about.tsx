@@ -6,11 +6,11 @@ function AboutUs() {
   return (
     <section
       id="about"
-      className="  md:mx-10 mx-4 py-5 text-black overflow-hidden"
+      className="relative md:mx-10 mx-4 py-5 text-black overflow-hidden"
     >
-      <div className=" inset-0 opacity-[0.04] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]" />
 
-      <div className=" max-w-7xl mx-auto grid lg:grid-cols-2 grid-cols-1 gap-24 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 grid-cols-1 gap-24 items-center">
         <div>
           <h2 className="mt-6 text-5xl md:text-7xl font-extralight leading-[1.05] tracking-[-0.04em]">
             {t("about.headingLine1")}

@@ -13,6 +13,11 @@ const linkIds = [
   "faq",
 ] as const;
 
+function sectionTo(location: { pathname: string }, fragment: string) {
+  const path = location.pathname === "/" ? "" : location.pathname;
+  return `${path}#${fragment}`;
+}
+
 export default function Navigation() {
   const { t } = useTranslation("common");
   const location = useLocation();
@@ -32,20 +37,8 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-      });
-
-      setMobileMenuOpen(false);
-    }
-  };
-
   const langToggleClass = `
-    text-xs font-medium uppercase tracking-widest px-3 py-2 rounded-full border transition
+    cursor-pointer text-xs font-medium uppercase tracking-widest px-3 py-2 rounded-full border transition no-underline
     ${
       scrolled
         ? "border-black/15 text-black hover:bg-black hover:text-white"
@@ -53,10 +46,20 @@ export default function Navigation() {
     }
   `;
 
+  const desktopNavLinkClass = `
+    cursor-pointer text-lg relative font-extralight leading-[1.05] tracking-[-0.04em] transition-all duration-500 no-underline
+    hover:opacity-100
+    ${
+      scrolled
+        ? "text-black/60 hover:text-black"
+        : "text-white hover:text-white"
+    }
+  `;
+
   return (
     <nav
       className={`
-        fixed top-0 left-0 right-0 z-50
+        pointer-events-auto fixed top-0 left-0 right-0 z-[100] isolate
         transition-all duration-700
         ${
           scrolled
@@ -65,7 +68,7 @@ export default function Navigation() {
         }
       `}
     >
-      <div className="absolute inset-0 overflow-hidden -z-10">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
         <div
           className={`
             absolute top-[-120px] left-[10%]
@@ -87,43 +90,34 @@ export default function Navigation() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between">
-          <button
-            onClick={() => scrollToSection("home")}
-            className="flex items-center gap-4 group"
-            type="button"
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="relative z-[110] flex w-full min-h-[3.25rem] items-center justify-between gap-4 pointer-events-auto touch-manipulation">
+          <Link
+            to={sectionTo(location, "home")}
+            className="flex min-w-0 cursor-pointer items-center gap-4 group no-underline"
+            onClick={() => setMobileMenuOpen(false)}
           >
             <div
               className={`
                 w-16 h-16 rounded-2xl
                 flex items-center justify-center
-                border transition-all duration-700 bg-black  border-black/10"
-                
+                border transition-all duration-700 bg-black border-black/10
               `}
             >
               <img src={KyronetIcone} alt="Kyronet Icon" className="w-10 h-10" />
             </div>
-          </button>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-8">
             {linkIds.map((id) => (
-              <button
+              <Link
                 key={id}
-                type="button"
-                onClick={() => scrollToSection(id)}
-                className={`
-                  text-lg relative font-extralight leading-[1.05] tracking-[-0.04em] transition-all duration-500
-                  hover:opacity-100
-                  ${
-                    scrolled
-                      ? "text-black/60 hover:text-black"
-                      : "text-white hover:text-white"
-                  }
-                `}
+                to={sectionTo(location, id)}
+                className={desktopNavLinkClass}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t(`nav.${id}`)}
-              </button>
+              </Link>
             ))}
 
             <Link
@@ -134,11 +128,10 @@ export default function Navigation() {
               {isEn ? t("nav.langFr") : t("nav.langEn")}
             </Link>
 
-            <button
-              type="button"
-              onClick={() => scrollToSection("contact")}
+            <Link
+              to={sectionTo(location, "contact")}
               className={`
-                px-6 py-3 rounded-full
+                cursor-pointer no-underline px-6 py-3 rounded-full
                 transition-all duration-700
                 ${
                   scrolled
@@ -146,18 +139,19 @@ export default function Navigation() {
                     : "bg-white text-black"
                 }
               `}
+              onClick={() => setMobileMenuOpen(false)}
             >
               {t("nav.contact")}
-            </button>
+            </Link>
           </div>
 
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`
-              lg:hidden w-11 h-11 rounded-xl
-              flex items-center justify-center
-              transition-all duration-700
+              relative z-[120] shrink-0 lg:hidden
+              flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl
+              transition-all duration-700 touch-manipulation
               ${
                 scrolled
                   ? "bg-black text-white"
@@ -175,7 +169,7 @@ export default function Navigation() {
 
         <div
           className={`
-            lg:hidden overflow-hidden
+            relative z-[105] lg:hidden overflow-hidden
             transition-all duration-700
             ${
               mobileMenuOpen
@@ -197,26 +191,26 @@ export default function Navigation() {
             `}
           >
             {linkIds.map((id) => (
-              <button
+              <Link
                 key={id}
-                type="button"
-                onClick={() => scrollToSection(id)}
+                to={sectionTo(location, id)}
                 className={`
-                  block w-full text-left transition
+                  block w-full cursor-pointer text-left transition no-underline
                   ${
                     scrolled
                       ? "text-black/70 hover:text-black"
                       : "text-white/70 hover:text-white"
                   }
                 `}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {t(`nav.${id}`)}
-              </button>
+              </Link>
             ))}
 
             <Link
               to={isEn ? "/" : "/en"}
-              className={`block w-full text-center py-3 rounded-2xl text-sm font-medium uppercase tracking-widest ${
+              className={`block w-full cursor-pointer text-center py-3 rounded-2xl text-sm font-medium uppercase tracking-widest no-underline ${
                 scrolled ? "bg-black/5 text-black border border-black/10" : "bg-white/10 text-white border border-white/10"
               }`}
               onClick={() => setMobileMenuOpen(false)}
@@ -225,11 +219,10 @@ export default function Navigation() {
               {isEn ? t("nav.langFr") : t("nav.langEn")}
             </Link>
 
-            <button
-              type="button"
-              onClick={() => scrollToSection("contact")}
+            <Link
+              to={sectionTo(location, "contact")}
               className={`
-                w-full py-3 rounded-2xl mt-4
+                block w-full text-center cursor-pointer no-underline py-3 rounded-2xl mt-4
                 transition-all duration-700
                 ${
                   scrolled
@@ -237,9 +230,10 @@ export default function Navigation() {
                     : "bg-white text-black"
                 }
               `}
+              onClick={() => setMobileMenuOpen(false)}
             >
               {t("nav.contact")}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

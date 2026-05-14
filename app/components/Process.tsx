@@ -35,11 +35,11 @@ export default function Process() {
       id="process"
       className="bg-black mx-10 rounded-3xl text-white relative overflow-hidden py-20"
     >
-      <div className="absolute inset-0 bg-grid-white/[0.02]"></div>
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-lime-300/10 rounded-full blur-[180px]"></div>
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[180px]"></div>
+      <div className="pointer-events-none absolute inset-0 bg-grid-white/[0.02]" />
+      <div className="pointer-events-none absolute top-0 left-1/4 w-[500px] h-[500px] bg-lime-300/10 rounded-full blur-[180px]" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[180px]" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="uppercase tracking-[0.35em] text-xs text-white/50">
             {t("process.eyebrow")}

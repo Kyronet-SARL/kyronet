@@ -13,7 +13,7 @@ function Testimonials() {
       id="testimonials"
       className="relative py-5 md:mx-10 mx-6 bg-white text-black overflow-hidden"
     >
-      <div className="absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-[-120px] left-[-120px] w-[500px] h-[500px] bg-black/5 rounded-full blur-[140px]"></div>
 
         <div className="absolute bottom-[-150px] right-[-150px] w-[600px] h-[600px] bg-black/5 rounded-full blur-[160px]"></div>
@@ -21,7 +21,7 @@ function Testimonials() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-black/5 rounded-full blur-[180px]"></div>
       </div>
 
-      <div className="max-w-4xl mx-auto text-center mb-24 relative">
+      <div className="relative z-10 max-w-4xl mx-auto mb-24 text-center">
         <span className="uppercase tracking-[0.35em] text-xs text-black/50">
           {t("testimonials.eyebrow")}
         </span>
@@ -35,7 +35,7 @@ function Testimonials() {
         <p className="mt-8 text-black/60 text-lg">{t("testimonials.subtitle")}</p>
       </div>
 
-      <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 relative">
+      <div className="relative z-10 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
         {testimonials.map((item, i) => (
           <div key={i} className="relative group">
             <div className="text-6xl text-black/10 absolute -top-6 left-0 group-hover:text-black/20 transition">
@@ -54,7 +54,7 @@ function Testimonials() {
         ))}
       </div>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-24 h-24 bg-black/10 rounded-full blur-2xl"></div>
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 w-24 h-24 bg-black/10 rounded-full blur-2xl" />
     </section>
   );
 }

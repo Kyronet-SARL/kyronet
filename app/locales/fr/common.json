@@ -4,7 +4,7 @@
     "description": "Kyronet est votre partenaire IT pour concevoir des infrastructures performantes, sécurisées et évolutives."
   },
   "nav": {
-    "about": "À propos de nous",
+    "about": "À propos",
     "services": "Services",
     "projects": "Projets",
     "process": "Processus",
@@ -194,7 +194,7 @@
     "terms": "CGV"
   },
   "partenaire": {
-    "title": "Partenaires de premier plan"
+    "title": "Nos partenaires"
   },
   "errors": {
     "title": "Erreur",

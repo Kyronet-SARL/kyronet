@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "title": "Kyronet - Your IT partner",
+    "description": "Kyronet is your IT partner for designing secure, high-performance, and scalable infrastructures."
+  },
+  "nav": {
+    "about": "About us",
+    "services": "Services",
+    "projects": "Projects",
+    "process": "Process",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "contact": "Contact us",
+    "langFr": "FR",
+    "langEn": "EN",
+    "switchToFr": "Show site in French",
+    "switchToEn": "Show site in English"
+  },
+  "hero": {
+    "title": "Your IT infrastructure, our expertise",
+    "subtitle": "We design, deploy, and manage tailored IT systems to move your business forward.",
+    "videoFallback": "Your browser does not support the video tag."
+  },
+  "button": {
+    "discover": "Discover",
+    "ourServices": "Our services"
+  },
+  "about": {
+    "headingLine1": "We build",
+    "headingLine2": "high-performance IT",
+    "headingLine3": "infrastructures.",
+    "p1": "We design and manage modern IT ecosystems—including networks, virtualization, and secure cloud platforms—for organizations that demand reliability and performance.",
+    "p2": "From network architecture to disaster recovery, we ensure continuity, scalability, and security at every layer of your information system.",
+    "statProjects": "Projects",
+    "statMonitoring": "Monitoring",
+    "statUptime": "Uptime",
+    "visualLabel": "Infrastructure",
+    "visualTitleLine1": "Built with",
+    "visualTitleLine2": "precision"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "titleLine1": "End-to-end",
+    "titleLine2": "IT expertise",
+    "intro": "A structured approach to design and operate modern infrastructures.",
+    "items": [
+      {
+        "title": "Endpoint & workstation fleet",
+        "description": "Full lifecycle management of your devices, rollout, and continuous monitoring."
+      },
+      {
+        "title": "Managed services & support",
+        "description": "Proactive maintenance and technical assistance to keep your services running."
+      },
+      {
+        "title": "Networking & cybersecurity",
+        "description": "Advanced protection and hardening for business-critical systems."
+      },
+      {
+        "title": "Virtualization & cloud",
+        "description": "Migration and operations for scalable, high-performance cloud environments."
+      },
+      {
+        "title": "Backup & disaster recovery",
+        "description": "Backup strategies and fast recovery when incidents occur."
+      },
+      {
+        "title": "Development & databases",
+        "description": "Custom applications and optimized management of business data."
+      },
+      {
+        "title": "Training & enablement",
+        "description": "Upskilling your teams and hands-on operational support."
+      }
+    ]
+  },
+  "project": {
+    "eyebrow": "Projects",
+    "titleLine1": "Selected",
+    "titleLine2": "work",
+    "viewProject": "View project",
+    "items": [
+      {
+        "title": "HOOM",
+        "category": "Development",
+        "description": "HOOM is an innovative learning platform that helps students revise with interactive quizzes, past papers, course summaries, and smart AI assistance."
+      },
+      {
+        "title": "HotelPro",
+        "category": "Development",
+        "description": "HotelPro is a full hotel management platform for reservations, rooms, billing, restaurant, and accounting."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Our approach",
+    "titleLine1": "Built to",
+    "titleLine2": "last",
+    "intro": "From strategic analysis to continuous monitoring, every step aims for a reliable, scalable, high-performance infrastructure.",
+    "stepLabel": "Step {{n}}",
+    "steps": [
+      {
+        "title": "Audit & analysis",
+        "description": "We assess your existing infrastructure, identify improvements, and clarify your requirements.",
+        "duration": "1-2 weeks"
+      },
+      {
+        "title": "Design",
+        "description": "We design a tailored architecture aligned with your processes and business goals.",
+        "duration": "2-3 weeks"
+      },
+      {
+        "title": "Deployment",
+        "description": "Progressive rollout with rigorous testing and team training.",
+        "duration": "4-8 weeks"
+      },
+      {
+        "title": "Ongoing support",
+        "description": "24/7 supervision, preventive maintenance, and continuous optimization.",
+        "duration": "Unlimited"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "titleLine1": "What our",
+    "titleLine2": "clients say",
+    "subtitle": "Organizations that trust us with their critical infrastructure.",
+    "items": [
+      {
+        "name": "Sarah Johnson",
+        "role": "CTO, Fintech Company",
+        "text": "Outstanding technical expertise. Their approach completely transformed our IT infrastructure."
+      },
+      {
+        "name": "Michael Brown",
+        "role": "IT Director, Logistics",
+        "text": "Reliability, performance, and security. The team delivered a robust, scalable architecture."
+      },
+      {
+        "name": "David Martin",
+        "role": "CEO, SaaS Platform",
+        "text": "A true strategic partner. They understand both business and technical challenges."
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "titleLine1": "Frequently",
+    "titleLine2": "asked questions",
+    "subtitle": "Everything you need to know about our IT services.",
+    "ctaPrompt": "Have a specific question?",
+    "ctaButton": "Contact us",
+    "items": [
+      {
+        "question": "What are your response times?",
+        "answer": "We provide 24/7 coverage with under 15 minutes response for critical incidents."
+      },
+      {
+        "question": "Do you offer a free audit?",
+        "answer": "Yes, we perform a full, free infrastructure audit with a detailed report and concrete recommendations."
+      },
+      {
+        "question": "How do you ensure security?",
+        "answer": "We use Zero Trust principles, advanced firewalls, encryption, and continuous monitoring across systems."
+      },
+      {
+        "question": "Which technologies do you work with?",
+        "answer": "VMware, Kubernetes, Cisco, Fortinet, AWS, Azure, plus custom solutions in Python, PHP, and Go."
+      },
+      {
+        "question": "Are backups secure?",
+        "answer": "Yes, we follow the 3-2-1 rule with immutable backups and regular restore testing."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "titleLine1": "Let’s build",
+    "titleLine2": "your system",
+    "intro": "We design secure, high-performance, scalable IT infrastructures for modern businesses.",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "formTitle": "Request a free audit",
+    "placeholderName": "Full name",
+    "placeholderEmail": "Work email",
+    "placeholderCompany": "Company",
+    "placeholderMessage": "Tell us about your needs...",
+    "submit": "Send",
+    "footerCopyright": "© 2026 Kyronet. All rights reserved.",
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "partenaire": {
+    "title": "Leading partners"
+  },
+  "errors": {
+    "title": "Error",
+    "oops": "Oops!",
+    "unexpected": "An unexpected error occurred.",
+    "notFoundTitle": "404",
+    "notFoundDetail": "The requested page could not be found.",
+    "bilingualHint": "An unexpected error occurred. / Une erreur inattendue s’est produite."
+  }
+}

@@ -1,31 +1,26 @@
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { useState, useEffect, useMemo } from "react";
+import {  Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import KyronetIcone from "../asset/kyronet_icon.png";
+import KyronetIcone from "../asset/kyronet_icon.png"
 
-const linkIds = [
-  "about",
-  "services",
-  "projects",
-  "process",
-  "testimonials",
-  "faq",
-] as const;
-
-function sectionTo(location: { pathname: string }, fragment: string) {
-  const path = location.pathname === "/" ? "" : location.pathname;
-  return `${path}#${fragment}`;
-}
+const LANG_STORAGE_KEY = "kyronet-lang";
 
 export default function Navigation() {
-  const { t } = useTranslation("common");
-  const location = useLocation();
+  const { t, i18n } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const isEn =
-    location.pathname === "/en" || location.pathname.startsWith("/en/");
+  const links = useMemo(
+    () => [
+      { label: t("navigation.about"), id: "about" },
+      { label: t("navigation.services"), id: "services" },
+      { label: t("navigation.projects"), id: "projects" },
+      { label: t("navigation.process"), id: "process" },
+      { label: t("navigation.testimonials"), id: "testimonials" },
+      { label: t("navigation.faq"), id: "faq" },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,57 +32,80 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const langToggleClass = `
-    cursor-pointer text-xs font-medium uppercase tracking-widest px-3 py-2 rounded-full border transition no-underline
-    ${
-      scrolled
-        ? "border-black/15 text-black hover:bg-black hover:text-white"
-        : "border-white/25 text-white hover:bg-white hover:text-black"
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(LANG_STORAGE_KEY);
+      if (stored === "fr" || stored === "en") {
+        void i18n.changeLanguage(stored);
+      }
+    } catch {
+      /* ignore */
     }
-  `;
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- appliquer la langue sauvegardée une fois au montage
+  }, []);
 
-  const mobileMenuButtonClass = `
-    cursor-pointer inline-flex h-11 min-w-11 items-center justify-center rounded-full border text-sm font-medium uppercase tracking-widest transition no-underline touch-manipulation
-    ${
-      scrolled
-        ? "border-black/15 text-black hover:bg-black hover:text-white"
-        : "border-white/25 text-white hover:bg-white hover:text-black"
-    }
-    ${mobileMenuOpen ? (scrolled ? "bg-black text-white" : "bg-white text-black") : ""}
-  `;
+  useEffect(() => {
+    const sync = (lng: string) => {
+      document.documentElement.lang = lng.split("-")[0] ?? "fr";
+    };
+    sync(i18n.language);
+    i18n.on("languageChanged", sync);
+    return () => {
+      i18n.off("languageChanged", sync);
+    };
+  }, [i18n]);
 
-  const desktopNavLinkClass = `
-    cursor-pointer text-lg relative font-extralight leading-[1.05] tracking-[-0.04em] transition-all duration-500 no-underline
-    hover:opacity-100
-    ${
-      scrolled
-        ? "text-black/60 hover:text-black"
-        : "text-white hover:text-white"
+  const setLanguage = (lng: "fr" | "en") => {
+    void i18n.changeLanguage(lng).then(() => {
+      try {
+        localStorage.setItem(LANG_STORAGE_KEY, lng);
+      } catch {
+        /* ignore */
+      }
+    });
+  };
+
+  const langIs = (lng: "fr" | "en") => i18n.language.startsWith(lng);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+
+      setMobileMenuOpen(false);
     }
-  `;
+  };
 
   return (
-    // CORRECTION 1: Suppression de 'isolate' qui peut bloquer les z-index sur mobile
     <nav
       className={`
-        pointer-events-auto fixed top-0 left-0 right-0 z-[9999]
+        fixed top-0 left-0 right-0 z-50
         transition-all duration-700
         ${
           scrolled
-            ? "bg-black/80 backdrop-blur-2xl border-b border-black/10 py-4"
-            : "bg-black/50 py-6"
+            ? "bg-white/80 backdrop-blur-2xl border-b border-black/10 py-4"
+            : "bg-transparent  py-6"
         }
       `}
     >
-      {/* CORRECTION 2: -z-10 est bien, mais pointer-events-none est crucial */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+
+      {/* GLOW BACKGROUND */}
+      <div className="absolute inset-0 overflow-hidden -z-10">
+
         <div
           className={`
             absolute top-[-120px] left-[10%]
             w-[350px] h-[350px]
             rounded-full blur-[120px]
             transition-all duration-700
-            ${scrolled ? "bg-black/5" : ""}
+            ${
+              scrolled
+                ? "bg-black/5"
+                : ""
+            }
           `}
         />
 
@@ -97,53 +115,101 @@ export default function Navigation() {
             w-[300px] h-[300px]
             rounded-full blur-[120px]
             transition-all duration-700
-            ${scrolled ? "bg-blue-500/5" : "bg-white/10"}
+            ${
+              scrolled
+                ? "bg-blue-500/5"
+                : "bg-white/10"
+            }
           `}
         />
+
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="relative z-[110] flex w-full min-h-[3.25rem] items-center justify-between gap-4 pointer-events-auto touch-manipulation">
-          <Link
-            to={sectionTo(location, "home")}
-            className="flex min-w-0 cursor-pointer items-center gap-4 group no-underline"
-            onClick={() => setMobileMenuOpen(false)}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <div className="flex items-center justify-between">
+
+          {/* LOGO */}
+          <button
+            onClick={() => scrollToSection("home")}
+            className="flex items-center gap-4 group"
           >
+
             <div
               className={`
                 w-16 h-16 rounded-2xl
                 flex items-center justify-center
-                border transition-all duration-700 bg-black border-black/10
+                border transition-all duration-700 bg-black  border-black/10"
+                
               `}
             >
-              <img src={KyronetIcone} alt="Kyronet Icon" className="w-10 h-10" />
+              <img src={KyronetIcone} alt={t("navigation.logoAlt")} className="w-10 h-10"  />
             </div>
-          </Link>
+          </button>
 
-          <div className="hidden lg:flex items-center gap-8">
-            {linkIds.map((id) => (
-              <Link
-                key={id}
-                to={sectionTo(location, id)}
-                className={desktopNavLinkClass}
-                onClick={() => setMobileMenuOpen(false)}
+          {/* DESKTOP MENU */}
+          <div className="hidden lg:flex items-center gap-10">
+
+            {links.map((link, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToSection(link.id)}
+                className={`
+                  text-lg relative font-extralight leading-[1.05] tracking-[-0.04em] transition-all duration-500
+                  hover:opacity-100
+                  ${
+                    scrolled
+                      ? "text-black/60 hover:text-black"
+                      : "text-white hover:text-white"
+                  }
+                `}
               >
-                {t(`nav.${id}`)}
-              </Link>
+                {link.label}
+              </button>
             ))}
 
-            <Link
-              to={isEn ? "/" : "/en"}
-              className={langToggleClass}
-              aria-label={isEn ? t("nav.switchToFr") : t("nav.switchToEn")}
-            >
-              {isEn ? t("nav.langFr") : t("nav.langEn")}
-            </Link>
-
-            <Link
-              to={sectionTo(location, "contact")}
+            {/* Langue */}
+            <div
               className={`
-                cursor-pointer no-underline px-6 py-3 rounded-full
+                flex items-center rounded-full p-0.5
+                ${
+                  scrolled
+                    ? "border border-black/15 bg-black/[0.03]"
+                    : "border border-white/25 bg-white/10"
+                }
+              `}
+              role="group"
+              aria-label={t("navigation.languageGroup")}
+            >
+              {(["fr", "en"] as const).map((lng) => (
+                <button
+                  key={lng}
+                  type="button"
+                  aria-pressed={langIs(lng)}
+                  onClick={() => setLanguage(lng)}
+                  className={`
+                    px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-wide transition-all duration-500
+                    ${
+                      langIs(lng)
+                        ? scrolled
+                          ? "bg-black text-white"
+                          : "bg-white text-black"
+                        : scrolled
+                          ? "text-black/50 hover:text-black"
+                          : "text-white/65 hover:text-white"
+                    }
+                  `}
+                >
+                  {lng === "fr" ? t("navigation.langFr") : t("navigation.langEn")}
+                </button>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <button
+              onClick={() => scrollToSection("contact")}
+              className={`
+                px-6 py-3 rounded-full
                 transition-all duration-700
                 ${
                   scrolled
@@ -151,80 +217,117 @@ export default function Navigation() {
                     : "bg-white text-black"
                 }
               `}
-              onClick={() => setMobileMenuOpen(false)}
             >
-              {t("nav.contact")}
-            </Link>
+              {t("navigation.cta")}
+            </button>
           </div>
 
+          {/* MOBILE BUTTON */}
           <button
-            type="button"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav-panel"
-            id="mobile-nav-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`relative z-[140] shrink-0 lg:hidden ${mobileMenuButtonClass}`}
+            className={`
+              lg:hidden w-11 h-11 rounded-xl
+              flex items-center justify-center
+              transition-all duration-700
+              ${
+                scrolled
+                  ? "bg-black text-white"
+                  : "bg-white/10 text-white border border-white/10"
+              }
+            `}
           >
             {mobileMenuOpen ? (
-              <X className="h-5 w-5" aria-hidden />
+              <X className="w-5 h-5" />
             ) : (
-              <Menu className="h-5 w-5" aria-hidden />
+              <Menu className="w-5 h-5" />
             )}
           </button>
+
         </div>
 
-        {/* CORRECTION 3: Menu Mobile sécurisé */}
+        {/* MOBILE MENU */}
         <div
-          id="mobile-nav-panel"
-          role="navigation"
-          aria-label={t("nav.menu")}
           className={`
-            relative z-[150] mt-6 lg:hidden
-            transition-all duration-500 ease-in-out origin-top
-            ${mobileMenuOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none h-0 overflow-hidden"}
+            lg:hidden overflow-hidden
+            transition-all duration-700
+            ${
+              mobileMenuOpen
+                ? "max-h-[600px] opacity-100 mt-6"
+                : "max-h-0 opacity-0"
+            }
           `}
         >
+
           <div
             className={`
               rounded-3xl p-6 space-y-5
-              backdrop-blur-2xl border shadow-lg
-              /* Ajout d'un fond explicite pour garantir la clicabilité */
-              ${scrolled ? "bg-white/95 border-black/10" : "bg-black/80 border-white/15"}
+              backdrop-blur-2xl border
+              transition-all duration-700
+              ${
+                scrolled
+                  ? "bg-white/90 border-black/10"
+                  : "bg-black/70 border-white/10"
+              }
             `}
           >
-            {linkIds.map((id) => (
-              <Link
-                key={id}
-                to={sectionTo(location, id)}
+
+            {links.map((link, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToSection(link.id)}
                 className={`
-                  block w-full cursor-pointer text-left transition no-underline py-2
+                  block w-full text-left transition
                   ${
                     scrolled
                       ? "text-black/70 hover:text-black"
                       : "text-white/70 hover:text-white"
                   }
                 `}
-                onClick={() => setMobileMenuOpen(false)}
               >
-                {t(`nav.${id}`)}
-              </Link>
+                {link.label}
+              </button>
             ))}
 
-            <Link
-              to={isEn ? "/" : "/en"}
-              className={`block w-full cursor-pointer text-center py-3 rounded-2xl text-sm font-medium uppercase tracking-widest no-underline ${
-                scrolled ? "bg-black/5 text-black border border-black/10" : "bg-white/10 text-white border border-white/10"
-              }`}
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label={isEn ? t("nav.switchToFr") : t("nav.switchToEn")}
-            >
-              {isEn ? t("nav.langFr") : t("nav.langEn")}
-            </Link>
-
-            <Link
-              to={sectionTo(location, "contact")}
+            <div
               className={`
-                block w-full text-center cursor-pointer no-underline py-3 rounded-2xl mt-4
+                flex items-center justify-center gap-2 rounded-2xl p-1
+                ${
+                  scrolled
+                    ? "border border-black/10 bg-black/[0.03]"
+                    : "border border-white/15 bg-white/5"
+                }
+              `}
+              role="group"
+              aria-label={t("navigation.languageGroup")}
+            >
+              {(["fr", "en"] as const).map((lng) => (
+                <button
+                  key={lng}
+                  type="button"
+                  aria-pressed={langIs(lng)}
+                  onClick={() => setLanguage(lng)}
+                  className={`
+                    flex-1 py-2 rounded-xl text-sm font-medium uppercase tracking-wide transition-all duration-500
+                    ${
+                      langIs(lng)
+                        ? scrolled
+                          ? "bg-black text-white"
+                          : "bg-white text-black"
+                        : scrolled
+                          ? "text-black/50"
+                          : "text-white/65"
+                    }
+                  `}
+                >
+                  {lng === "fr" ? t("navigation.langFr") : t("navigation.langEn")}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => scrollToSection("contact")}
+              className={`
+                w-full py-3 rounded-2xl mt-4
                 transition-all duration-700
                 ${
                   scrolled
@@ -232,12 +335,14 @@ export default function Navigation() {
                     : "bg-white text-black"
                 }
               `}
-              onClick={() => setMobileMenuOpen(false)}
             >
-              {t("nav.contact")}
-            </Link>
+              {t("navigation.cta")}
+            </button>
+
           </div>
+
         </div>
+
       </div>
     </nav>
   );

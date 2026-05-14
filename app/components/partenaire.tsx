@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 
 function Partenaire() {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation();
+
   const partenaires = [
     "Oracle",
     "fortinet",
@@ -14,13 +15,13 @@ function Partenaire() {
     <div className="px-5 text-black pt-8 pb-10">
       <div className="mb-10">
         <h2 className="text-center tracking-tighter text-xl leading-none">
-          {t("partenaire.title")}
+          {t("partenaire.heading")}
         </h2>
       </div>
       <div className="overflow-hidden mask-l-from-90%  mask-r-from-90%">
         <div className="flex animate-marquee space-x-10">
           {partenaires.concat(partenaires).map((item, index) => (
-            <div key={index} className="h-20 w-20 shrink-0 md:h-32 md:w-32">
+            <div key={index} className="md:w-35 md:h-32  w-20 h-20 shrink-0">
               {item}
             </div>
           ))}

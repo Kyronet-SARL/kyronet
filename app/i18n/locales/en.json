@@ -1,0 +1,268 @@
+{
+  "common": {
+    "errorOops": "Oops!",
+    "error404": "404",
+    "errorGeneric": "Error",
+    "errorUnexpected": "An unexpected error occurred.",
+    "errorNotFound": "The requested page could not be found."
+  },
+  "home": {
+    "metaTitle": "Kyronet - Your IT partner",
+    "metaDescription": "Kyronet is your IT partner for designing high-performing, secure, and scalable infrastructures."
+  },
+  "navigation": {
+    "about": "About us",
+    "services": "Services",
+    "projects": "Projects",
+    "process": "Process",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "cta": "Contact us",
+    "logoAlt": "Kyronet icon",
+    "languageGroup": "Site language",
+    "langFr": "FR",
+    "langEn": "EN"
+  },
+  "hero": {
+    "title": "Your IT infrastructure, our expertise",
+    "subtitle": "We design, deploy, and manage tailored IT infrastructures to propel your business into the future.",
+    "videoUnsupported": "Your browser does not support the video tag.",
+    "discover": "Discover",
+    "ourServices": "Our services"
+  },
+  "about": {
+    "titleLine1": "We build",
+    "titleHighlight": "high-performing IT",
+    "titleSuffix": "infrastructures.",
+    "p1": "We design and manage modern IT ecosystems including networks, virtualization, and secure cloud infrastructures for organizations that demand performance and reliability.",
+    "p2": "From network architecture to business continuity, we ensure scalability, resilience, and security at every layer of your information system.",
+    "statProjects": "Projects",
+    "statMonitoring": "Monitoring",
+    "statUptime": "Uptime",
+    "visualEyebrow": "Infrastructure",
+    "visualTitleLine1": "Built with",
+    "visualTitleLine2": "precision"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "titleLine1": "Expertise",
+    "titleLine2": "end-to-end IT",
+    "intro": "A structured approach to design and manage modern infrastructures.",
+    "items": {
+      "office": {
+        "title": "End-user computing",
+        "description": "Full lifecycle management of your IT equipment, rollout, and continuous monitoring."
+      },
+      "managed": {
+        "title": "Managed services & support",
+        "description": "Proactive maintenance and technical assistance to keep your services running smoothly."
+      },
+      "netsec": {
+        "title": "Networking & cybersecurity",
+        "description": "Advanced protection for your infrastructure and hardening of critical systems."
+      },
+      "cloud": {
+        "title": "Virtualization & cloud",
+        "description": "Migration and management of high-performance, scalable cloud environments."
+      },
+      "backup": {
+        "title": "Backup & disaster recovery",
+        "description": "Backup strategies and fast recovery when incidents occur."
+      },
+      "devdb": {
+        "title": "Development & databases",
+        "description": "Custom applications and optimized management of your business data."
+      },
+      "training": {
+        "title": "Training & guidance",
+        "description": "Upskilling your teams and hands-on operational support."
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "titleLine1": "Selected",
+    "titleLine2": "work",
+    "category": "Development",
+    "viewProject": "View project",
+    "hoom": {
+      "title": "HOOM",
+      "year": "2025",
+      "description": "HOOM is an innovative learning platform that helps students revise with interactive quizzes, past papers, course summaries, and smart AI assistance."
+    },
+    "hotelpro": {
+      "title": "HotelPro",
+      "year": "2026",
+      "description": "HotelPro is a full hotel management platform for reservations, rooms, billing, restaurant operations, and accounting."
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "titleLine1": "What our",
+    "titleLine2": "clients say",
+    "subtitle": "Organizations that trust us with their mission-critical infrastructure.",
+    "items": [
+      {
+        "name": "Sarah Johnson",
+        "role": "CTO, Fintech Company",
+        "text": "Outstanding technical expertise. Their approach completely transformed our IT infrastructure."
+      },
+      {
+        "name": "Michael Brown",
+        "role": "IT Director, Logistics",
+        "text": "Reliability, performance, and security. The team delivered a robust, scalable architecture."
+      },
+      {
+        "name": "David Martin",
+        "role": "CEO, SaaS Platform",
+        "text": "A true strategic partner. They understand both business and technical challenges."
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "titleLine1": "Frequently",
+    "titleLine2": "asked questions",
+    "subtitle": "Everything you need to know about our IT services.",
+    "moreQuestion": "Have a specific question?",
+    "cta": "Contact us",
+    "items": [
+      {
+        "question": "What are your response times?",
+        "answer": "We provide 24/7 coverage with sub-15-minute response for critical incidents."
+      },
+      {
+        "question": "Do you offer a free audit?",
+        "answer": "Yes. We perform a full, free infrastructure audit with a detailed report and concrete recommendations."
+      },
+      {
+        "question": "How do you ensure security?",
+        "answer": "We use Zero Trust architectures, next-generation firewalls, encryption, and continuous monitoring across systems."
+      },
+      {
+        "question": "Which technologies do you work with?",
+        "answer": "VMware, Kubernetes, Cisco, Fortinet, AWS, Azure, plus custom solutions in Python, PHP, and Go."
+      },
+      {
+        "question": "Are backups secure?",
+        "answer": "Yes. We follow the 3-2-1 rule with immutable backups and regular restore testing."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "titleLine1": "Let's build",
+    "titleLine2": "your stack",
+    "intro": "We design high-performing, secure, and scalable IT infrastructures for modern organizations.",
+    "phoneLabel": "Phone",
+    "phoneValue": "+253 77 30 94 07",
+    "emailLabel": "Email",
+    "emailValue": "sales@kyronet.net / support@kyronet.net",
+    "addressLabel": "Address",
+    "addressValue": "Djibouti City, Q6, CLE",
+    "formTitle": "Request a free audit",
+    "placeholderName": "Full name",
+    "placeholderEmail": "Work email",
+    "placeholderCompany": "Company",
+    "placeholderMessage": "Tell us about your needs...",
+    "submit": "Send",
+    "copyright": "© 2026 Kyronet. All rights reserved.",
+    "legal": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "stats": {
+    "items": [
+      { "value": "99.98%", "label": "Guaranteed availability" },
+      { "value": "120+", "label": "Active clients" },
+      { "value": "15+", "label": "Years of expertise" },
+      { "value": "24/7", "label": "Support available" }
+    ]
+  },
+  "expertise": {
+    "network": {
+      "badge": "Network infrastructure",
+      "title": "High-performance, secure networks",
+      "intro": "We design modern network architectures that combine performance, security, and scalability to support your growth.",
+      "bullets": [
+        "Highly available LAN/WAN design",
+        "SD-WAN for multi-site connectivity",
+        "VLAN segmentation and Zero Trust",
+        "Enterprise Wi-Fi with centralized management",
+        "Next-generation firewalls (NGFW)",
+        "Load balancing and redundancy"
+      ]
+    },
+    "virtualization": {
+      "badge": "Virtualization",
+      "title": "Optimize resources with virtualization",
+      "intro": "Consolidate servers, improve agility, and reduce costs with our advanced virtualization solutions.",
+      "bullets": [
+        "VMware vSphere & ESXi for enterprises",
+        "Microsoft Hyper-V and System Center",
+        "Proxmox VE for flexible infrastructures",
+        "Kubernetes and container orchestration",
+        "VDI (Virtual Desktop Infrastructure)",
+        "High availability and disaster recovery"
+      ]
+    },
+    "backup": {
+      "badge": "Backup & protection",
+      "title": "Keep your data protected in every scenario",
+      "intro": "Immutable backup strategies and business continuity plans to keep your operations running.",
+      "bullets": [
+        "3-2-1 strategy (3 copies, 2 media types, 1 off-site)",
+        "Immutable backups against ransomware",
+        "Veeam Backup & Replication",
+        "Synchronous and asynchronous replication",
+        "Automated restore testing",
+        "RPO/RTO tuned to your needs"
+      ]
+    },
+    "dev": {
+      "badge": "Development & automation",
+      "title": "Automate and streamline your IT processes",
+      "intro": "Our developers build tailored tools to automate repetitive work and connect your systems.",
+      "bullets": [
+        "Python scripts for automation",
+        "Custom PHP web applications",
+        "REST APIs for system integration",
+        "Infrastructure as Code (Terraform, Ansible)",
+        "Custom migration tooling",
+        "Personalized dashboards and reporting"
+      ]
+    }
+  },
+  "partenaire": {
+    "heading": "Our partners"
+  },
+  "process": {
+    "eyebrow": "Our approach",
+    "titleLine1": "An approach designed to",
+    "titleLine2": "last",
+    "intro": "From strategic analysis to ongoing support, every step is designed to build an infrastructure that is performant, reliable, and scalable.",
+    "stepLabel": "Step {{num}}",
+    "steps": {
+      "audit": {
+        "title": "Audit & Analysis",
+        "description": "We assess your existing infrastructure, identify improvement opportunities, and define your requirements.",
+        "duration": "1-2 weeks"
+      },
+      "design": {
+        "title": "Design",
+        "description": "Our team designs a tailored architecture, optimized for your processes and business goals.",
+        "duration": "2-3 weeks"
+      },
+      "deploy": {
+        "title": "Deployment",
+        "description": "Progressive rollout of the solution with rigorous testing and training for your teams.",
+        "duration": "4-8 weeks"
+      },
+      "support": {
+        "title": "Ongoing support",
+        "description": "24/7 monitoring, preventive maintenance, and continuous optimization of your infrastructure.",
+        "duration": "Unlimited"
+      }
+    }
+  }
+}

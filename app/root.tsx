@@ -5,13 +5,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteLoaderData,
 } from "react-router";
+import { useTranslation } from "react-i18next";
 
-import enCommon from "./locales/en/common.json";
-import frCommon from "./locales/fr/common.json";
-import { getLocaleFromPathname } from "./i18n/locale";
 import type { Route } from "./+types/root";
+import "./i18n/i18n";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -27,16 +25,9 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const pathname = new URL(request.url).pathname;
-  const htmlLang = getLocaleFromPathname(pathname);
-  return { htmlLang };
-}
-
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useRouteLoaderData("root") as { htmlLang?: "fr" | "en" } | undefined;
   return (
-    <html lang={data?.htmlLang ?? "fr"}>
+    <html lang="fr">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,20 +48,17 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const rootData = useRouteLoaderData("root") as { htmlLang?: "fr" | "en" } | undefined;
-  const lang = rootData?.htmlLang === "en" ? "en" : "fr";
-  const err = lang === "en" ? enCommon.errors : frCommon.errors;
-
-  let message = err.oops;
-  let details = err.unexpected;
+  const { t } = useTranslation();
+  let message = t("common.errorOops");
+  let details = t("common.errorUnexpected");
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? err.notFoundTitle : err.title;
+    message = error.status === 404 ? t("common.error404") : t("common.errorGeneric");
     details =
       error.status === 404
-        ? err.notFoundDetail
-        : error.statusText || err.unexpected;
+        ? t("common.errorNotFound")
+        : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;

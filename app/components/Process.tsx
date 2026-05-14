@@ -1,45 +1,65 @@
-import { Cog, FileText, Rocket, Search } from "lucide-react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Search, FileText, Cog, Rocket } from "lucide-react";
 
-const stepIcons = [Search, FileText, Cog, Rocket] as const;
+const STEP_KEYS = ["audit", "design", "deploy", "support"] as const;
 
-type ProcessStep = {
-  title: string;
-  description: string;
-  duration: string;
-};
+const STEP_STYLE = [
+  {
+    icon: Search,
+    color: "text-teal-400",
+    bgColor: "bg-teal-500/10",
+    borderColor: "border-teal-500/30",
+  },
+  {
+    icon: FileText,
+    color: "text-cyan-400",
+    bgColor: "bg-cyan-500/10",
+    borderColor: "border-cyan-500/30",
+  },
+  {
+    icon: Cog,
+    color: "text-emerald-400",
+    bgColor: "bg-emerald-500/10",
+    borderColor: "border-emerald-500/30",
+  },
+  {
+    icon: Rocket,
+    color: "text-lime-400",
+    bgColor: "bg-lime-500/10",
+    borderColor: "border-lime-500/30",
+  },
+] as const;
 
 export default function Process() {
-  const { t } = useTranslation("common");
-  const stepTexts = t("process.steps", { returnObjects: true }) as ProcessStep[];
+  const { t } = useTranslation();
 
-  const steps = stepTexts.map((step, index) => ({
-    ...step,
-    icon: stepIcons[index],
-    color: ["text-teal-400", "text-cyan-400", "text-emerald-400", "text-lime-400"][
-      index
-    ],
-    bgColor: ["bg-teal-500/10", "bg-cyan-500/10", "bg-emerald-500/10", "bg-lime-500/10"][
-      index
-    ],
-    borderColor: [
-      "border-teal-500/30",
-      "border-cyan-500/30",
-      "border-emerald-500/30",
-      "border-lime-500/30",
-    ][index],
-  }));
+  const steps = useMemo(
+    () =>
+      STEP_KEYS.map((key, index) => {
+        const style = STEP_STYLE[index];
+        return {
+          ...style,
+          title: t(`process.steps.${key}.title`),
+          description: t(`process.steps.${key}.description`),
+          duration: t(`process.steps.${key}.duration`),
+        };
+      }),
+    [t],
+  );
 
   return (
     <section
       id="process"
-      className="relative mx-4 overflow-hidden rounded-3xl bg-black py-20 text-white sm:mx-6 md:mx-10"
+      className="bg-black mx-10 rounded-3xl text-white relative overflow-hidden py-20"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-white/[0.02]" />
-      <div className="pointer-events-none absolute top-0 left-1/4 w-[500px] h-[500px] bg-lime-300/10 rounded-full blur-[180px]" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[180px]" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-grid-white/[0.02]"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-lime-300/10 rounded-full blur-[180px]"></div>
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[180px]"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Heading */}
         <div className="text-center mb-16">
           <span className="uppercase tracking-[0.35em] text-xs text-white/50">
             {t("process.eyebrow")}
@@ -54,41 +74,36 @@ export default function Process() {
           </p>
         </div>
 
+        {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center group"
-              >
-                <div
-                  className={`w-20 h-20 rounded-2xl ${step.bgColor} ${step.borderColor} border-2 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <Icon className={`w-10 h-10 ${step.color}`} strokeWidth={1.5} />
-                </div>
-
-                <span className="text-white/30 text-sm font-light mb-3">
-                  {t("process.stepLabel", {
-                    n: String(index + 1).padStart(2, "0"),
-                  })}
-                </span>
-
-                <h3 className="text-xl font-light mb-3 tracking-tight">
-                  {step.title}
-                </h3>
-
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                  {step.description}
-                </p>
-
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-lime-300/80">
-                  <div className="w-8 h-px bg-lime-300/50"></div>
-                  {step.duration}
-                </div>
+          {steps.map((step, index) => (
+            <div key={index} className="flex flex-col items-center text-center group">
+              {/* Icon */}
+              <div className={`w-20 h-20 rounded-2xl ${step.bgColor} ${step.borderColor} border-2 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <step.icon className={`w-10 h-10 ${step.color}`} strokeWidth={1.5} />
               </div>
-            );
-          })}
+
+              {/* Step number */}
+              <span className="text-white/30 text-sm font-light mb-3">
+                {t("process.stepLabel", { num: String(index + 1).padStart(2, "0") })}
+              </span>
+
+              {/* Content */}
+              <h3 className="text-xl font-light mb-3 tracking-tight">
+                {step.title}
+              </h3>
+
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                {step.description}
+              </p>
+
+              {/* Duration */}
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-lime-300/80">
+                <div className="w-8 h-px bg-lime-300/50"></div>
+                {step.duration}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -46,6 +46,17 @@ export default function Navigation() {
     }
   `;
 
+  /** Même style « pilule bordée » que le sélecteur de langue (FR/EN). */
+  const mobileMenuButtonClass = `
+    cursor-pointer inline-flex h-11 min-w-11 items-center justify-center rounded-full border text-sm font-medium uppercase tracking-widest transition no-underline touch-manipulation
+    ${
+      scrolled
+        ? "border-black/15 text-black hover:bg-black hover:text-white"
+        : "border-white/25 text-white hover:bg-white hover:text-black"
+    }
+    ${mobileMenuOpen ? (scrolled ? "bg-black text-white" : "bg-white text-black") : ""}
+  `;
+
   const desktopNavLinkClass = `
     cursor-pointer text-lg relative font-extralight leading-[1.05] tracking-[-0.04em] transition-all duration-500 no-underline
     hover:opacity-100
@@ -147,29 +158,28 @@ export default function Navigation() {
 
           <button
             type="button"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-panel"
+            id="mobile-nav-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`
-              relative z-[120] shrink-0 lg:hidden
-              flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl
-              transition-all duration-700 touch-manipulation
-              ${
-                scrolled
-                  ? "bg-black text-white"
-                  : "bg-white/10 text-white border border-white/10"
-              }
-            `}
+            className={`relative z-[120] shrink-0 lg:hidden ${mobileMenuButtonClass}`}
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5" />
+              <X className="h-5 w-5" aria-hidden />
             ) : (
-              <Menu className="w-5 h-5" />
+              <Menu className="h-5 w-5" aria-hidden />
             )}
           </button>
         </div>
 
         <div
+          id="mobile-nav-panel"
+          role="region"
+          aria-labelledby="mobile-nav-toggle"
+          aria-hidden={!mobileMenuOpen}
           className={`
             relative z-[105] lg:hidden overflow-hidden
+            ${mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}
             transition-all duration-700
             ${
               mobileMenuOpen

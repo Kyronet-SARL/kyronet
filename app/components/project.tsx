@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Hom from "../asset/Projet/Hom.png";
 import HotelPro from "../asset/Projet/HotelPro.png";
@@ -28,7 +28,6 @@ function Project() {
     );
   }
 
-  /** Toujours une entrée par carte (image + année) : les textes viennent des locales quand présents. */
   const projects = projectExtras.map((extra, i) => {
     const copy = copyItems[i];
     return {
@@ -39,53 +38,70 @@ function Project() {
     };
   });
 
-  const [current, setCurrent] = useState(0);
-  const [slideWidthPx, setSlideWidthPx] = useState(0);
-  const timeoutRef = useRef<number | null>(null);
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    const node = viewportRef.current;
-    if (!node) return;
-
-    const measure = () => {
-      const w = node.clientWidth;
-      if (w > 0) setSlideWidthPx(w);
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(node);
-    return () => ro.disconnect();
-  }, []);
-
   const count = projects.length;
   const safeCount = count > 0 ? count : 1;
 
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % safeCount);
-  };
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const [current, setCurrent] = useState(0);
+  const currentRef = useRef(0);
+  currentRef.current = current;
 
-  const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? safeCount - 1 : prev - 1));
-  };
+  const scrollToIndex = useCallback(
+    (index: number, smooth: boolean) => {
+      const root = scrollerRef.current;
+      if (!root || safeCount < 1) return;
+      const w = root.clientWidth;
+      if (w <= 0) return;
+      const clamped = ((index % safeCount) + safeCount) % safeCount;
+      const left = clamped * w;
+      if (smooth) {
+        root.scrollTo({ left, behavior: "smooth" });
+      } else {
+        root.scrollLeft = left;
+      }
+      setCurrent(clamped);
+    },
+    [safeCount],
+  );
+
+  useLayoutEffect(() => {
+    const root = scrollerRef.current;
+    if (!root) return;
+    const sync = () => {
+      const w = root.clientWidth;
+      if (w <= 0) return;
+      root.scrollLeft = currentRef.current * w;
+    };
+    sync();
+    const ro = new ResizeObserver(() => {
+      requestAnimationFrame(sync);
+    });
+    ro.observe(root);
+    return () => ro.disconnect();
+  }, [safeCount]);
 
   useEffect(() => {
-    if (count < 2) return;
-
-    timeoutRef.current = window.setTimeout(() => {
-      setCurrent((prev) => (prev + 1) % safeCount);
+    if (safeCount < 2) return;
+    const id = window.setTimeout(() => {
+      scrollToIndex(currentRef.current + 1, true);
     }, 6000);
+    return () => window.clearTimeout(id);
+  }, [current, safeCount, scrollToIndex]);
 
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [current, count, safeCount]);
+  const onScrollSnap = () => {
+    const root = scrollerRef.current;
+    if (!root) return;
+    const w = root.clientWidth;
+    if (w <= 0) return;
+    const idx = Math.round(root.scrollLeft / w);
+    const clamped = Math.max(0, Math.min(safeCount - 1, idx));
+    if (clamped !== currentRef.current) setCurrent(clamped);
+  };
 
   return (
     <section
       id="projects"
-      className="relative py-32 bg-white text-black overflow-x-clip"
+      className="relative overflow-x-visible py-32 bg-white text-black"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-black/5 rounded-full blur-[140px]" />
@@ -107,104 +123,87 @@ function Project() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
         <div
-          ref={viewportRef}
-          className="overflow-hidden rounded-[2rem]"
+          ref={scrollerRef}
+          onScroll={onScrollSnap}
+          className="
+            grid w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden
+            rounded-[2rem] [-webkit-overflow-scrolling:touch] [grid-auto-flow:column]
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          "
+          style={{ gridAutoColumns: "100%" }}
         >
-          <div
-            className="flex transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={
-              slideWidthPx > 0
-                ? {
-                    width: slideWidthPx * safeCount,
-                    transform: `translateX(-${current * slideWidthPx}px)`,
-                  }
-                : {
-                    width: `${safeCount * 100}%`,
-                    transform: `translateX(-${(current * 100) / safeCount}%)`,
-                  }
-            }
-          >
-            {projects.map((p, i) => (
-              <div
-                key={i}
-                className="box-border min-w-0 shrink-0 flex flex-col lg:flex-row items-center gap-14 lg:gap-24"
-                style={
-                  slideWidthPx > 0
-                    ? { width: slideWidthPx, flex: "0 0 auto" }
-                    : { width: `${100 / safeCount}%` }
-                }
-              >
-                <div className="relative flex-1 w-full">
-                  <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-black/5 blur-[120px] scale-110" />
+          {projects.map((p, i) => (
+            <article
+              key={i}
+              className="box-border flex min-w-0 snap-start flex-col items-center gap-14 lg:flex-row lg:gap-24"
+            >
+              <div className="relative w-full flex-1">
+                <div className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-black/5 blur-[120px]" />
 
-                  <div className="overflow-hidden rounded-[2rem]">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="
-                        w-full
-                        h-[320px] md:h-[500px]
-                        object-cover
-                        hover:scale-105
-                        transition duration-[1800ms]
-                      "
-                    />
-                  </div>
-                </div>
-
-                <div className="relative z-10 flex-1">
-                  <div className="flex items-center gap-6 text-xs tracking-[0.3em] text-black/40 uppercase">
-                    <span>{p.category}</span>
-
-                    <span className="w-8 h-[1px] bg-black/20"></span>
-
-                    <span>{p.year}</span>
-                  </div>
-
-                  <h3 className="mt-6 text-4xl md:text-6xl font-light tracking-[-0.04em] leading-[1.05]">
-                    {p.title}
-                  </h3>
-
-                  <p className="mt-8 text-black/60 text-lg leading-relaxed max-w-xl">
-                    {p.description}
-                  </p>
-
-                  {"lien" in p && p.lien ? (
-                    <a
-                      href={p.lien}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative z-10 mt-6 inline-flex flex-col items-start py-2 text-black no-underline"
-                    >
-                      <span className="text-sm font-medium uppercase tracking-[0.18em] text-black underline decoration-black/30 underline-offset-4 transition group-hover:decoration-black">
-                        {t("project.viewProject")}
-                      </span>
-
-                      <div className="relative mt-3 h-px w-20 overflow-hidden bg-black/15">
-                        <div className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
-                      </div>
-
-                      <div className="pointer-events-none absolute -bottom-2 left-0 h-10 w-24 bg-black/[0.03] blur-2xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-                    </a>
-                  ) : (
-                    <p className="relative z-10 mt-6 text-sm font-medium uppercase tracking-[0.18em] text-black/45">
-                      {t("project.linkSoon")}
-                    </p>
-                  )}
-
-                  <div className="mt-10 w-20 h-[1px] bg-black/20"></div>
+                <div className="overflow-hidden rounded-[2rem]">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="
+                      h-[320px] w-full object-cover
+                      transition duration-[1800ms]
+                      hover:scale-105
+                      md:h-[500px]
+                    "
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div className="relative z-10 w-full flex-1">
+                <div className="flex items-center gap-6 text-xs uppercase tracking-[0.3em] text-black/40">
+                  <span>{p.category}</span>
+                  <span className="h-[1px] w-8 bg-black/20" />
+                  <span>{p.year}</span>
+                </div>
+
+                <h3 className="mt-6 text-4xl font-light leading-[1.05] tracking-[-0.04em] md:text-6xl">
+                  {p.title}
+                </h3>
+
+                <p className="mt-8 max-w-xl text-lg leading-relaxed text-black/60">
+                  {p.description}
+                </p>
+
+                {"lien" in p && p.lien ? (
+                  <a
+                    href={p.lien}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative z-10 mt-6 inline-flex flex-col items-start py-2 text-black no-underline"
+                  >
+                    <span className="text-sm font-medium uppercase tracking-[0.18em] text-black underline decoration-black/30 underline-offset-4 transition group-hover:decoration-black">
+                      {t("project.viewProject")}
+                    </span>
+
+                    <div className="relative mt-3 h-px w-20 overflow-hidden bg-black/15">
+                      <div className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
+                    </div>
+
+                    <div className="pointer-events-none absolute -bottom-2 left-0 h-10 w-24 bg-black/[0.03] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
+                  </a>
+                ) : (
+                  <p className="relative z-10 mt-6 text-sm font-medium uppercase tracking-[0.18em] text-black/45">
+                    {t("project.linkSoon")}
+                  </p>
+                )}
+
+                <div className="mt-10 h-[1px] w-20 bg-black/20" />
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div className="relative z-50 isolate mt-14 flex pointer-events-auto touch-manipulation items-center justify-between gap-6">
+        <div className="relative z-50 mt-14 flex touch-manipulation items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <button
               type="button"
               aria-label={t("project.prev")}
-              onClick={prevSlide}
+              onClick={() => scrollToIndex(current - 1, true)}
               className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
               <ChevronLeft size={18} aria-hidden />
@@ -213,7 +212,7 @@ function Project() {
             <button
               type="button"
               aria-label={t("project.next")}
-              onClick={nextSlide}
+              onClick={() => scrollToIndex(current + 1, true)}
               className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
               <ChevronRight size={18} aria-hidden />
@@ -227,7 +226,7 @@ function Project() {
                 key={i}
                 aria-label={t("project.goToSlide", { n: i + 1 })}
                 aria-pressed={current === i}
-                onClick={() => setCurrent(i)}
+                onClick={() => scrollToIndex(i, true)}
                 className="flex h-11 min-w-11 cursor-pointer items-center justify-center p-2"
               >
                 <span

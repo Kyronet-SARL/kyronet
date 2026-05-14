@@ -14,7 +14,8 @@
     "langFr": "FR",
     "langEn": "EN",
     "switchToFr": "Afficher le site en français",
-    "switchToEn": "Afficher le site en anglais"
+    "switchToEn": "Afficher le site en anglais",
+    "menu": "Menu principal"
   },
   "hero": {
     "title": "Votre infrastructure IT, notre expertise",

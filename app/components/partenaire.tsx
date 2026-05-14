@@ -20,7 +20,7 @@ function Partenaire() {
       <div className="overflow-hidden mask-l-from-90%  mask-r-from-90%">
         <div className="flex animate-marquee space-x-10">
           {partenaires.concat(partenaires).map((item, index) => (
-            <div key={index} className="md:w-35 md:h-32  w-20 h-20 shrink-0">
+            <div key={index} className="h-20 w-20 shrink-0 md:h-32 md:w-32">
               {item}
             </div>
           ))}

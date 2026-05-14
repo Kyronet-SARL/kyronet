@@ -46,7 +46,6 @@ export default function Navigation() {
     }
   `;
 
-  /** Même style « pilule bordée » que le sélecteur de langue (FR/EN). */
   const mobileMenuButtonClass = `
     cursor-pointer inline-flex h-11 min-w-11 items-center justify-center rounded-full border text-sm font-medium uppercase tracking-widest transition no-underline touch-manipulation
     ${
@@ -68,17 +67,19 @@ export default function Navigation() {
   `;
 
   return (
+    // CORRECTION 1: Suppression de 'isolate' qui peut bloquer les z-index sur mobile
     <nav
       className={`
-        pointer-events-auto fixed top-0 left-0 right-0 z-[100] isolate
+        pointer-events-auto fixed top-0 left-0 right-0 z-[9999]
         transition-all duration-700
         ${
           scrolled
             ? "bg-black/80 backdrop-blur-2xl border-b border-black/10 py-4"
-            : "bg-black/50  py-6"
+            : "bg-black/50 py-6"
         }
       `}
     >
+      {/* CORRECTION 2: -z-10 est bien, mais pointer-events-none est crucial */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
         <div
           className={`
@@ -162,7 +163,7 @@ export default function Navigation() {
             aria-controls="mobile-nav-panel"
             id="mobile-nav-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`relative z-[120] shrink-0 lg:hidden ${mobileMenuButtonClass}`}
+            className={`relative z-[140] shrink-0 lg:hidden ${mobileMenuButtonClass}`}
           >
             {mobileMenuOpen ? (
               <X className="h-5 w-5" aria-hidden />
@@ -172,32 +173,23 @@ export default function Navigation() {
           </button>
         </div>
 
+        {/* CORRECTION 3: Menu Mobile sécurisé */}
         <div
           id="mobile-nav-panel"
-          role="region"
-          aria-labelledby="mobile-nav-toggle"
-          aria-hidden={!mobileMenuOpen}
+          role="navigation"
+          aria-label={t("nav.menu")}
           className={`
-            relative z-[105] lg:hidden overflow-hidden
-            ${mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}
-            transition-all duration-700
-            ${
-              mobileMenuOpen
-                ? "max-h-[500px] opacity-100 mt-6"
-                : "max-h-0 opacity-0"
-            }
+            relative z-[150] mt-6 lg:hidden
+            transition-all duration-500 ease-in-out origin-top
+            ${mobileMenuOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none h-0 overflow-hidden"}
           `}
         >
           <div
             className={`
               rounded-3xl p-6 space-y-5
-              backdrop-blur-2xl border
-              transition-all duration-700
-              ${
-                scrolled
-                  ? "bg-white/90 border-black/10"
-                  : "bg-black/70 border-white/10"
-              }
+              backdrop-blur-2xl border shadow-lg
+              /* Ajout d'un fond explicite pour garantir la clicabilité */
+              ${scrolled ? "bg-white/95 border-black/10" : "bg-black/80 border-white/15"}
             `}
           >
             {linkIds.map((id) => (
@@ -205,7 +197,7 @@ export default function Navigation() {
                 key={id}
                 to={sectionTo(location, id)}
                 className={`
-                  block w-full cursor-pointer text-left transition no-underline
+                  block w-full cursor-pointer text-left transition no-underline py-2
                   ${
                     scrolled
                       ? "text-black/70 hover:text-black"

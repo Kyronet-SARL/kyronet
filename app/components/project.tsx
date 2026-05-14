@@ -42,6 +42,7 @@ function Project() {
   const safeCount = count > 0 ? count : 1;
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const lastScrollerWidthRef = useRef(0);
   const [current, setCurrent] = useState(0);
   const currentRef = useRef(0);
   currentRef.current = current;
@@ -59,6 +60,7 @@ function Project() {
       } else {
         root.scrollLeft = left;
       }
+      lastScrollerWidthRef.current = w;
       setCurrent(clamped);
     },
     [safeCount],
@@ -67,14 +69,19 @@ function Project() {
   useLayoutEffect(() => {
     const root = scrollerRef.current;
     if (!root) return;
-    const sync = () => {
+
+    const syncOnWidthChange = () => {
       const w = root.clientWidth;
       if (w <= 0) return;
+      if (w === lastScrollerWidthRef.current) return;
+      lastScrollerWidthRef.current = w;
       root.scrollLeft = currentRef.current * w;
     };
-    sync();
+
+    syncOnWidthChange();
+
     const ro = new ResizeObserver(() => {
-      requestAnimationFrame(sync);
+      requestAnimationFrame(syncOnWidthChange);
     });
     ro.observe(root);
     return () => ro.disconnect();
@@ -101,7 +108,7 @@ function Project() {
   return (
     <section
       id="projects"
-      className="relative overflow-x-visible py-32 bg-white text-black"
+      className="relative overflow-x-hidden bg-white py-32 text-black"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-black/5 rounded-full blur-[140px]" />
@@ -121,14 +128,14 @@ function Project() {
         </h2>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="relative isolate z-10 mx-auto max-w-7xl overflow-x-hidden px-6 lg:px-10">
         <div
           ref={scrollerRef}
           onScroll={onScrollSnap}
           className="
-            grid w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden
+            pointer-events-auto relative z-0 grid w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden
             rounded-[2rem] [-webkit-overflow-scrolling:touch] [grid-auto-flow:column]
-            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
           "
           style={{ gridAutoColumns: "100%" }}
         >
@@ -198,13 +205,13 @@ function Project() {
           ))}
         </div>
 
-        <div className="relative z-50 mt-14 flex touch-manipulation items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
+        <div className="pointer-events-auto relative z-[90] mt-14 flex touch-manipulation items-center justify-between gap-6">
+          <div className="pointer-events-auto flex items-center gap-3">
             <button
               type="button"
               aria-label={t("project.prev")}
               onClick={() => scrollToIndex(current - 1, true)}
-              className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
+              className="pointer-events-auto relative z-[100] flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
               <ChevronLeft size={18} aria-hidden />
             </button>
@@ -213,13 +220,13 @@ function Project() {
               type="button"
               aria-label={t("project.next")}
               onClick={() => scrollToIndex(current + 1, true)}
-              className="relative z-50 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
+              className="pointer-events-auto relative z-[100] flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/15 bg-white text-black shadow-sm transition-all hover:bg-black hover:text-white md:h-14 md:w-14"
             >
               <ChevronRight size={18} aria-hidden />
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center justify-end gap-2">
+          <div className="pointer-events-auto flex flex-wrap items-center justify-end gap-2">
             {projects.map((_, i) => (
               <button
                 type="button"
@@ -227,7 +234,7 @@ function Project() {
                 aria-label={t("project.goToSlide", { n: i + 1 })}
                 aria-pressed={current === i}
                 onClick={() => scrollToIndex(i, true)}
-                className="flex h-11 min-w-11 cursor-pointer items-center justify-center p-2"
+                className="pointer-events-auto flex h-11 min-w-11 cursor-pointer items-center justify-center p-2"
               >
                 <span
                   className={`block h-[3px] rounded-full transition-all duration-500 ${

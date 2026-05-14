@@ -33,7 +33,7 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="bg-black mx-10 rounded-3xl text-white relative overflow-hidden py-20"
+      className="relative mx-4 overflow-hidden rounded-3xl bg-black py-20 text-white sm:mx-6 md:mx-10"
     >
       <div className="pointer-events-none absolute inset-0 bg-grid-white/[0.02]" />
       <div className="pointer-events-none absolute top-0 left-1/4 w-[500px] h-[500px] bg-lime-300/10 rounded-full blur-[180px]" />

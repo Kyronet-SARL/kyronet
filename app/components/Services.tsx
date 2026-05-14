@@ -36,7 +36,7 @@ export default function ServicesStacked() {
             {t("services.eyebrow")}
           </span>
 
-          <h2 className="mt-6 text-6xl font-extralight leading-[1.05] tracking-[-0.05em]">
+          <h2 className="mt-6 break-words text-4xl font-extralight leading-[1.05] tracking-[-0.05em] sm:text-5xl md:text-6xl lg:text-7xl">
             {t("services.titleLine1")}
             <br />
             <span className="font-normal">{t("services.titleLine2")}</span>

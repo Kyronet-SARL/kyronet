@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <h1 className="text-white text-6xl md:text-7xl lg:text-7xl font-extralight tracking-[-0.05em] leading-none">
+        <h1 className="break-words text-4xl font-extralight leading-none tracking-[-0.05em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
           {t("hero.title")}
         </h1>
 

@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Hom from "../asset/Projet/Hom.png";
 import HotelPro from "../asset/Projet/HotelPro.png";
@@ -18,6 +18,16 @@ function Project() {
     ? (rawItems as ProjectCopy[])
     : [];
 
+  if (
+    import.meta.env.DEV &&
+    copyItems.length > 0 &&
+    copyItems.length !== projectExtras.length
+  ) {
+    console.warn(
+      `[project] project.items (${copyItems.length}) ne correspond pas à projectExtras (${projectExtras.length}).`,
+    );
+  }
+
   /** Toujours une entrée par carte (image + année) : les textes viennent des locales quand présents. */
   const projects = projectExtras.map((extra, i) => {
     const copy = copyItems[i];
@@ -30,7 +40,24 @@ function Project() {
   });
 
   const [current, setCurrent] = useState(0);
+  const [slideWidthPx, setSlideWidthPx] = useState(0);
   const timeoutRef = useRef<number | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const node = viewportRef.current;
+    if (!node) return;
+
+    const measure = () => {
+      const w = node.clientWidth;
+      if (w > 0) setSlideWidthPx(w);
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(node);
+    return () => ro.disconnect();
+  }, []);
 
   const count = projects.length;
   const safeCount = count > 0 ? count : 1;
@@ -79,19 +106,33 @@ function Project() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="overflow-hidden rounded-[2rem]">
+        <div
+          ref={viewportRef}
+          className="overflow-hidden rounded-[2rem]"
+        >
           <div
             className="flex transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{
-              width: `${safeCount * 100}%`,
-              transform: `translateX(-${(current * 100) / safeCount}%)`,
-            }}
+            style={
+              slideWidthPx > 0
+                ? {
+                    width: slideWidthPx * safeCount,
+                    transform: `translateX(-${current * slideWidthPx}px)`,
+                  }
+                : {
+                    width: `${safeCount * 100}%`,
+                    transform: `translateX(-${(current * 100) / safeCount}%)`,
+                  }
+            }
           >
             {projects.map((p, i) => (
               <div
                 key={i}
                 className="box-border min-w-0 shrink-0 flex flex-col lg:flex-row items-center gap-14 lg:gap-24"
-                style={{ width: `${100 / safeCount}%` }}
+                style={
+                  slideWidthPx > 0
+                    ? { width: slideWidthPx, flex: "0 0 auto" }
+                    : { width: `${100 / safeCount}%` }
+                }
               >
                 <div className="relative flex-1 w-full">
                   <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-black/5 blur-[120px] scale-110" />

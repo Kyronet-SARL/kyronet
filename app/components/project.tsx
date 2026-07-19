@@ -1,17 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import Hom from "../asset/Projet/Hom.png";
 import HotelPro from "../asset/Projet/HotelPro.png";
+import Restaurant from "../asset/Projet/Restaurant.png";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const PROJECT_IDS = ["hoom", "hotelpro"] as const;
+const PROJECT_IDS = ["hoom", "hotelpro", "restaurant"] as const;
 
 const PROJECT_ASSETS: Record<
   (typeof PROJECT_IDS)[number],
   { image: string; lien?: string }
 > = {
   hoom: { image: Hom, lien: "https://www.hoom.space/" },
-  hotelpro: { image: HotelPro },
+  hotelpro: { image: HotelPro, lien: "/hotelpro" },
+  restaurant: { image: Restaurant, lien: "/restaurant" },
 };
 
 function Project() {
@@ -135,23 +138,37 @@ function Project() {
                     {p.description}
                   </p>
 
+                  {/* BOUTON "VOIR LE PROJET" AMÉLIORÉ */}
                   {p.lien && (
-                    <a
-                      href={p.lien}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative inline-flex flex-col items-start py-5 overflow-hidden"
-                    >
-                      <span className="text-sm font-extralight leading-[1.05] tracking-[0.18em] uppercase text-black/70 transition-all duration-500 group-hover:text-black">
-                        {t("projects.viewProject")}
-                      </span>
-
-                      <div className="relative mt-3 h-[1px] w-20 overflow-hidden bg-black/10">
-                        <div className="absolute inset-0 origin-left scale-x-0 bg-black transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
-                      </div>
-
-                      <div className="absolute -bottom-2 left-0 h-10 w-24 bg-black/[0.03] blur-2xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-                    </a>
+                    p.lien.startsWith("http") ? (
+                      <a
+                        href={p.lien}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full border border-black/20 hover:border-black bg-white hover:bg-black transition-all duration-500 shadow-sm hover:shadow-lg"
+                      >
+                        <span className="text-sm font-medium tracking-[0.15em] uppercase text-black/80 group-hover:text-white transition-colors duration-500">
+                          {t("projects.viewProject")}
+                        </span>
+                        <ChevronRight 
+                          size={18} 
+                          className="text-black/60 group-hover:text-white group-hover:translate-x-1 transition-all duration-500" 
+                        />
+                      </a>
+                    ) : (
+                      <Link
+                        to={p.lien}
+                        className="group relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full border border-black/20 hover:border-black bg-white hover:bg-black transition-all duration-500 shadow-sm hover:shadow-lg"
+                      >
+                        <span className="text-sm font-medium tracking-[0.15em] uppercase text-black/80 group-hover:text-white transition-colors duration-500">
+                          {t("projects.viewProject")}
+                        </span>
+                        <ChevronRight 
+                          size={18} 
+                          className="text-black/60 group-hover:text-white group-hover:translate-x-1 transition-all duration-500" 
+                        />
+                      </Link>
+                    )
                   )}
 
                   <div className="mt-10 w-20 h-[1px] bg-black/20"></div>

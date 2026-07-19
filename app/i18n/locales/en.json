@@ -94,7 +94,229 @@
       "title": "HotelPro",
       "year": "2026",
       "description": "HotelPro is a full hotel management platform for reservations, rooms, billing, restaurant operations, and accounting."
+    },
+    "restaurant": {
+      "title": "RestoPro",
+      "year": "2026",
+      "description": "RestoPro is a complete restaurant management solution: dashboard, order taking, checkout, digital menu with QR code, inventory, recipes, supplier purchasing, credit customers, and accounting."
     }
+  },
+  "hotelproPage": {
+    "back": "Back to home",
+    "title": "HotelPro",
+    "subtitle": "Hotel & restaurant management, unified.",
+    "description": "HotelPro is a complete hotel and restaurant management platform: rooms, reservations, point of sale, inventory, and accounting all in one tool, with configurable roles and permissions for each team.",
+    "stats": [
+      { "value": "6", "label": "Business modules" },
+      { "value": "20+", "label": "Screens" },
+      { "value": "100%", "label": "Configurable roles" }
+    ],
+    "modulesTitle": "A business-oriented architecture",
+    "modulesSubtitle": "Each team gets exactly the tools they need, nothing more, nothing less.",
+    "modules": [
+      {
+        "id": "hebergement",
+        "title": "Accommodation",
+        "description": "The heart of the hotel: rooms, reservations, and stays tracked in real-time.",
+        "features": [
+          "Dashboard & KPIs",
+          "Rooms & availability",
+          "Check-in / Check-out",
+          "Reservations & today's arrivals",
+          "Stays, extras & history"
+        ]
+      },
+      {
+        "id": "restaurant",
+        "title": "Restaurant",
+        "description": "A complete point of sale, linked to the public menu accessible via QR code.",
+        "features": [
+          "Order taking & tables",
+          "Menu & categories",
+          "QR code + public menu",
+          "Payment & receipts",
+          "Dedicated room service"
+        ]
+      },
+      {
+        "id": "stock",
+        "title": "Inventory & Purchases",
+        "description": "Ingredients, suppliers, and purchase orders tracked to never run out of stock.",
+        "features": [
+          "Stock categories",
+          "Ingredients & alert thresholds",
+          "Suppliers",
+          "Purchase orders"
+        ]
+      },
+      {
+        "id": "finance",
+        "title": "Finance & Accounting",
+        "description": "Integrated accounting, from the cash receipt to the monthly report.",
+        "features": [
+          "Cash journal",
+          "Expenses & miscellaneous costs",
+          "Supplier invoices",
+          "Accounting dashboard",
+          "Reports"
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Administration",
+        "description": "Configurable roles and permissions without touching the code.",
+        "features": [
+          "Users",
+          "Roles & permissions (page.*)",
+          "Audit log"
+        ]
+      },
+      {
+        "id": "configuration",
+        "title": "Configuration",
+        "description": "Settings that adapt the application to each establishment.",
+        "features": [
+          "Payment methods",
+          "General settings"
+        ]
+      }
+    ],
+    "galleryTitle": "Preview",
+    "gallerySubtitle": "Actual application screenshots.",
+    "gallery": [
+      { "file": "hotelpro-dashboard.png", "caption": "Dashboard" },
+      { "file": "hotelpro-rooms.png", "caption": "Rooms" },
+      { "file": "hotelpro-reservations.png", "caption": "Reservations" },
+      { "file": "hotelpro-checkin.png", "caption": "Check-in" },
+      { "file": "hotelpro-restaurant-hub.png", "caption": "Restaurant point of sale" },
+      { "file": "hotelpro-qrcode.png", "caption": "QR code menu" },
+      { "file": "hotelpro-comptabilite.png", "caption": "Accounting" },
+      { "file": "hotelpro-commande.png", "caption": "Purchase Orders" }
+    ],
+    "ctaTitle": "Have a similar project in mind?",
+    "ctaButton": "Let's talk"
+  },
+  "restaurantPage": {
+    "back": "Back to home",
+    "title": "RestoPro",
+    "subtitle": "Restaurant management, simplified.",
+    "description": "RestoPro is a complete restaurant management platform: dashboard, order taking, checkout, menu and combos, inventory and recipes, supplier purchasing, credit customers, and accounting, all in one tool, with a public QR-code menu and configurable roles for each cashier.",
+    "stats": [
+      { "value": "8", "label": "Business modules" },
+      { "value": "15+", "label": "Screens" },
+      { "value": "100%", "label": "Configurable roles" }
+    ],
+    "modulesTitle": "An architecture built for restaurants",
+    "modulesSubtitle": "From the dashboard to accounting, every team gets exactly the tools it needs.",
+    "modulesLabel": "Modules",
+    "modules": [
+      {
+        "id": "dashboard",
+        "title": "Dashboard",
+        "description": "A real-time overview of restaurant activity, from revenue to best-selling dishes.",
+        "features": [
+          "Real-time KPIs",
+          "Sales chart (day / week / month / year / custom range)",
+          "Top-selling dishes"
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Orders & Checkout",
+        "description": "Fast order taking, checkout, and automatically printed tickets.",
+        "features": [
+          "Order taking & active orders",
+          "Multi-method checkout",
+          "Customer ticket + kitchen slip",
+          "Order history",
+          "My shift: session & stats"
+        ]
+      },
+      {
+        "id": "menu",
+        "title": "Menu & Combos",
+        "description": "Menu, category, and combo management, with a public QR-code menu.",
+        "features": [
+          "Dishes & availability",
+          "Categories & types",
+          "Combo meals",
+          "Public menu via QR code"
+        ]
+      },
+      {
+        "id": "stock",
+        "title": "Inventory & Recipes",
+        "description": "Ingredients, stock movements, and recipe costs tracked in real time.",
+        "features": [
+          "Ingredients & alert thresholds",
+          "Stock movements",
+          "Recipes & food cost",
+          "Bulk stock-out"
+        ]
+      },
+      {
+        "id": "achats",
+        "title": "Purchasing & Suppliers",
+        "description": "Suppliers, purchase orders, and invoices tracked from order to payment.",
+        "features": [
+          "Suppliers",
+          "Purchase orders",
+          "Order receiving",
+          "Supplier invoices"
+        ]
+      },
+      {
+        "id": "clients",
+        "title": "Clients & Credit",
+        "description": "Track credit customers from invoicing to payment, so no receivable slips through.",
+        "features": [
+          "Customer profile & history",
+          "Billing cycle (weekly, monthly, cash)",
+          "Outstanding balance & reminders",
+          "Payments & payment history"
+        ]
+      },
+      {
+        "id": "finance",
+        "title": "Finance & Accounting",
+        "description": "Integrated accounting, from expenses to the monthly report.",
+        "features": [
+          "Expenses & validation",
+          "Monthly report",
+          "Integrated accounting"
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Administration",
+        "description": "Cashiers, roles, and permissions, plus settings specific to each restaurant.",
+        "features": [
+          "Cashier management",
+          "Roles & permissions per section",
+          "Restaurant logo & branding",
+          "VAT rate",
+          "ESC/POS receipt printing",
+          "Mobile Money operators"
+        ]
+      }
+    ],
+    "galleryLabel": "Gallery",
+    "galleryTitle": "Preview",
+    "gallerySubtitle": "Actual application screenshots.",
+    "gallery": [
+      { "file": "restopro-dashboard.png", "caption": "Dashboard" },
+      { "file": "restopro-commande.png", "caption": "Order taking" },
+      { "file": "restopro-caisse.png", "caption": "Checkout" },
+      { "file": "restopro-menu.png", "caption": "Menu & dishes" },
+      { "file": "restopro-qrcode.png", "caption": "Public QR-code menu" },
+      { "file": "restopro-stock.png", "caption": "Inventory & ingredients" },
+      { "file": "restopro-achats.png", "caption": "Purchasing & suppliers" },
+      { "file": "restopro-clients.png", "caption": "Clients & credit" },
+      { "file": "restopro-comptabilite.png", "caption": "Accounting" },
+      { "file": "restopro-admin.png", "caption": "Administration" }
+    ],
+    "ctaTitle": "Have a similar project in mind?",
+    "ctaButton": "Let's talk"
   },
   "testimonials": {
     "eyebrow": "Testimonials",
@@ -264,5 +486,8 @@
         "duration": "Unlimited"
       }
     }
+  },
+  "footer": {
+    "copyright": "© {{year}} Kyronet. All rights reserved."
   }
 }

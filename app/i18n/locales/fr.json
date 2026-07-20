@@ -325,18 +325,15 @@
     "subtitle": "Des entreprises qui nous font confiance pour leurs infrastructures critiques.",
     "items": [
       {
-        "name": "Sarah Johnson",
-        "role": "CTO, Fintech Company",
+        "name": "Hamze Idriss",
         "text": "Une expertise technique exceptionnelle. Leur approche a totalement transformé notre infrastructure IT."
       },
       {
-        "name": "Michael Brown",
-        "role": "Directeur IT, Logistique",
+        "name": "Yacoub issa",
         "text": "Fiabilité, performance et sécurité. L'équipe a livré une architecture robuste et scalable."
       },
       {
-        "name": "David Martin",
-        "role": "CEO, plateforme SaaS",
+        "name": "Asma Adaweh",
         "text": "Un vrai partenaire stratégique. Ils comprennent parfaitement les enjeux business et techniques."
       }
     ]

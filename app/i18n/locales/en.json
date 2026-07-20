@@ -325,18 +325,15 @@
     "subtitle": "Organizations that trust us with their mission-critical infrastructure.",
     "items": [
       {
-        "name": "Sarah Johnson",
-        "role": "CTO, Fintech Company",
+        "name": "Hamze Idriss",
         "text": "Outstanding technical expertise. Their approach completely transformed our IT infrastructure."
       },
       {
-        "name": "Michael Brown",
-        "role": "IT Director, Logistics",
+        "name": "Yacoub issa",
         "text": "Reliability, performance, and security. The team delivered a robust, scalable architecture."
       },
       {
-        "name": "David Martin",
-        "role": "CEO, SaaS Platform",
+        "name": "Asma Adaweh",
         "text": "A true strategic partner. They understand both business and technical challenges."
       }
     ]

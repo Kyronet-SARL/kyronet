@@ -94,7 +94,229 @@
       "title": "HotelPro",
       "year": "2026",
       "description": "HotelPro est une plateforme de gestion hôtelière complète permettant de gérer réservations, chambres, facturation, restaurant et comptabilité."
+    },
+    "restaurant": {
+      "title": "RestoPro",
+      "year": "2026",
+      "description": "RestoPro est une solution complète de gestion de restaurant : tableau de bord, prise de commande, encaissement, menu digital avec carte QR code, stock, recettes, achats fournisseurs, clients à crédit et comptabilité."
     }
+  },
+  "hotelproPage": {
+    "back": "Retour à l'accueil",
+    "title": "HotelPro",
+    "subtitle": "Gestion hôtelière & restaurant, unifiée.",
+    "description": "HotelPro est une plateforme complète de gestion hôtelière et de restauration : chambres, réservations, point de vente, stock et comptabilité réunis dans un seul outil, avec des rôles et permissions configurables pour chaque équipe.",
+    "stats": [
+      { "value": "6", "label": "Modules métier" },
+      { "value": "20+", "label": "Écrans" },
+      { "value": "100%", "label": "Rôles configurables" }
+    ],
+    "modulesTitle": "Une architecture pensée par métier",
+    "modulesSubtitle": "Chaque équipe retrouve exactement les outils dont elle a besoin, ni plus ni moins.",
+    "modules": [
+      {
+        "id": "hebergement",
+        "title": "Hébergement",
+        "description": "Le cœur de l'hôtel : chambres, réservations et séjours suivis en temps réel.",
+        "features": [
+          "Tableau de bord & KPIs",
+          "Chambres & disponibilité",
+          "Check-in / Check-out",
+          "Réservations & arrivées du jour",
+          "Séjours, extras & historique"
+        ]
+      },
+      {
+        "id": "restaurant",
+        "title": "Restaurant",
+        "description": "Un point de vente complet, relié à la carte publique accessible par QR code.",
+        "features": [
+          "Prise de commande & tables",
+          "Carte & catégories de menu",
+          "QR code + carte publique",
+          "Encaissement & tickets",
+          "Room service dédié"
+        ]
+      },
+      {
+        "id": "stock",
+        "title": "Stock & Achats",
+        "description": "Ingrédients, fournisseurs et bons de commande suivis pour ne jamais tomber en rupture.",
+        "features": [
+          "Catégories de stock",
+          "Ingrédients & seuils d'alerte",
+          "Fournisseurs",
+          "Bons de commande"
+        ]
+      },
+      {
+        "id": "finance",
+        "title": "Finance & Comptabilité",
+        "description": "Une comptabilité intégrée, du ticket de caisse au rapport mensuel.",
+        "features": [
+          "Journal de caisse",
+          "Dépenses & frais divers",
+          "Factures fournisseurs",
+          "Tableau de bord comptable",
+          "Rapports"
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Administration",
+        "description": "Des rôles et permissions configurables sans toucher au code.",
+        "features": [
+          "Utilisateurs",
+          "Rôles & permissions (page.*)",
+          "Journal d'audit"
+        ]
+      },
+      {
+        "id": "configuration",
+        "title": "Configuration",
+        "description": "Les réglages qui adaptent l'application à chaque établissement.",
+        "features": [
+          "Méthodes de paiement",
+          "Paramètres généraux"
+        ]
+      }
+    ],
+    "galleryTitle": "Aperçu en images",
+    "gallerySubtitle": "Captures d'écran réelles de l'application.",
+    "gallery": [
+      { "file": "hotelpro-dashboard.png", "caption": "Tableau de bord" },
+      { "file": "hotelpro-rooms.png", "caption": "Chambres" },
+      { "file": "hotelpro-reservations.png", "caption": "Réservations" },
+      { "file": "hotelpro-checkin.png", "caption": "Check-in" },
+      { "file": "hotelpro-restaurant-hub.png", "caption": "Point de vente restaurant" },
+      { "file": "hotelpro-qrcode.png", "caption": "QR code menu" },
+      { "file": "hotelpro-comptabilite.png", "caption": "Comptabilité" },
+      { "file": "hotelpro-commande.png", "caption": "Bon de commande" }
+    ],
+    "ctaTitle": "Un projet similaire en tête ?",
+    "ctaButton": "Discutons-en"
+  },
+  "restaurantPage": {
+    "back": "Retour à l'accueil",
+    "title": "RestoPro",
+    "subtitle": "La gestion de restaurant, simplifiée.",
+    "description": "RestoPro est une plateforme complète de gestion de restaurant : tableau de bord, prise de commande, encaissement, menu et formules, stock et recettes, achats fournisseurs, clients à crédit et comptabilité réunis dans un seul outil, avec une carte publique accessible par QR code et des rôles configurables pour chaque caissier.",
+    "stats": [
+      { "value": "8", "label": "Modules métier" },
+      { "value": "15+", "label": "Écrans" },
+      { "value": "100%", "label": "Rôles configurables" }
+    ],
+    "modulesTitle": "Une architecture pensée pour la restauration",
+    "modulesSubtitle": "Du tableau de bord à la comptabilité, chaque équipe a exactement les outils qu'il lui faut.",
+    "modulesLabel": "Modules",
+    "modules": [
+      {
+        "id": "dashboard",
+        "title": "Tableau de bord",
+        "description": "Une vue d'ensemble en temps réel de l'activité du restaurant, du chiffre d'affaires aux plats les plus vendus.",
+        "features": [
+          "KPIs en temps réel",
+          "Graphique des ventes (jour / semaine / mois / année / période personnalisée)",
+          "Top des plats vendus"
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commandes & Caisse",
+        "description": "Prise de commande rapide, encaissement et tickets imprimés automatiquement.",
+        "features": [
+          "Prise de commande & commandes en cours",
+          "Encaissement multi-moyens de paiement",
+          "Ticket client + bon cuisine",
+          "Historique des commandes",
+          "Ma caisse : session & statistiques"
+        ]
+      },
+      {
+        "id": "menu",
+        "title": "Menu & Formules",
+        "description": "Gestion du menu, des catégories et des formules, avec carte publique par QR code.",
+        "features": [
+          "Plats & disponibilité",
+          "Catégories & types",
+          "Formules / menus combinés",
+          "Carte publique accessible par QR code"
+        ]
+      },
+      {
+        "id": "stock",
+        "title": "Stock & Recettes",
+        "description": "Ingrédients, mouvements de stock et coûts de recettes suivis en temps réel.",
+        "features": [
+          "Ingrédients & seuils d'alerte",
+          "Mouvements de stock",
+          "Recettes & coût matière",
+          "Sorties multiples"
+        ]
+      },
+      {
+        "id": "achats",
+        "title": "Achats & Fournisseurs",
+        "description": "Fournisseurs, bons de commande et factures suivis de la commande au paiement.",
+        "features": [
+          "Fournisseurs",
+          "Bons de commande",
+          "Réception de commande",
+          "Factures fournisseurs"
+        ]
+      },
+      {
+        "id": "clients",
+        "title": "Clients & Crédit",
+        "description": "Suivi des clients à crédit, de la facturation au règlement, pour ne perdre aucune créance.",
+        "features": [
+          "Fiche client & historique",
+          "Cycle de facturation (hebdomadaire, mensuel, comptant)",
+          "Solde impayé & relances",
+          "Règlements & historique des paiements"
+        ]
+      },
+      {
+        "id": "finance",
+        "title": "Finance & Comptabilité",
+        "description": "Une comptabilité intégrée, des dépenses au rapport mensuel.",
+        "features": [
+          "Dépenses & validation",
+          "Rapport mensuel",
+          "Comptabilité intégrée"
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "Administration",
+        "description": "Caissiers, rôles et permissions, ainsi que les réglages propres à chaque restaurant.",
+        "features": [
+          "Gestion des caissiers",
+          "Rôles & permissions par section",
+          "Logo & identité du restaurant",
+          "Taux de TVA",
+          "Impression ticket ESC/POS",
+          "Opérateurs Mobile Money"
+        ]
+      }
+    ],
+    "galleryLabel": "Galerie",
+    "galleryTitle": "Aperçu en images",
+    "gallerySubtitle": "Captures d'écran réelles de l'application.",
+    "gallery": [
+      { "file": "restopro-dashboard.png", "caption": "Tableau de bord" },
+      { "file": "restopro-commande.png", "caption": "Prise de commande" },
+      { "file": "restopro-caisse.png", "caption": "Encaissement" },
+      { "file": "restopro-menu.png", "caption": "Menu & plats" },
+      { "file": "restopro-qrcode.png", "caption": "Carte publique QR code" },
+      { "file": "restopro-stock.png", "caption": "Stock & ingrédients" },
+      { "file": "restopro-achats.png", "caption": "Achats & fournisseurs" },
+      { "file": "restopro-clients.png", "caption": "Clients & crédit" },
+      { "file": "restopro-comptabilite.png", "caption": "Comptabilité" },
+      { "file": "restopro-admin.png", "caption": "Administration" }
+    ],
+    "ctaTitle": "Un projet similaire en tête ?",
+    "ctaButton": "Discutons-en"
   },
   "testimonials": {
     "eyebrow": "Témoignages",
@@ -264,5 +486,8 @@
         "duration": "Illimité"
       }
     }
+  },
+  "footer": {
+    "copyright": "© {{year}} Kyronet. Tous droits réservés."
   }
 }

@@ -23,7 +23,6 @@ export default function Home() {
     <div className="bg-white">
       <Navigation />
       <Hero />
-      <Partenaire />
       <AboutUs />
       
       <ServicesStacked />
@@ -32,6 +31,7 @@ export default function Home() {
   
       <Testimonials />
       <FAQ />
+      <Partenaire />
       <Contact />
       
 

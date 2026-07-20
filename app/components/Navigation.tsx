@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import {  Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import KyronetIcone from "../asset/kyronet_icon.png"
-
-const LANG_STORAGE_KEY = "kyronet-lang";
+import { LANG_STORAGE_KEY } from "../i18n/i18n";
 
 export default function Navigation() {
   const { t, i18n } = useTranslation();
@@ -31,29 +30,6 @@ export default function Navigation() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(LANG_STORAGE_KEY);
-      if (stored === "fr" || stored === "en") {
-        void i18n.changeLanguage(stored);
-      }
-    } catch {
-      /* ignore */
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- appliquer la langue sauvegardée une fois au montage
-  }, []);
-
-  useEffect(() => {
-    const sync = (lng: string) => {
-      document.documentElement.lang = lng.split("-")[0] ?? "fr";
-    };
-    sync(i18n.language);
-    i18n.on("languageChanged", sync);
-    return () => {
-      i18n.off("languageChanged", sync);
-    };
-  }, [i18n]);
 
   const setLanguage = (lng: "fr" | "en") => {
     void i18n.changeLanguage(lng).then(() => {

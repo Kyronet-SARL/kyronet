@@ -90,7 +90,7 @@ function Partenaire() {
   };
 
   return (
-    <div className="px-5 text-black pt-8 pb-10 bg-gradient-to-b from-white to-gray-50 relative">
+    <div className="partenaires-marquee px-5 text-black pt-8 pb-10 bg-gradient-to-b from-white to-gray-50 relative">
       <div className="mb-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
           {t("partenaire.heading")}
@@ -145,7 +145,7 @@ function Partenaire() {
             {[...partenaires, ...partenaires, ...partenaires].map((item, index) => (
               <div
                 key={index}
-                className="group relative flex-shrink-0 w-28 h-28 md:w-40 md:h-40 
+                className="partner-card group relative flex-shrink-0 w-28 h-28 md:w-40 md:h-40 
                          flex items-center justify-center p-4
                          hover:scale-110 hover:-translate-y-2
                          transition-all duration-500 cursor-pointer"
@@ -245,35 +245,35 @@ function Partenaire() {
             width: max-content;
           }
           
-          .group {
+          .partner-card {
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
           }
           
-          .group:nth-child(1) { animation-delay: 0.05s; }
-          .group:nth-child(2) { animation-delay: 0.1s; }
-          .group:nth-child(3) { animation-delay: 0.15s; }
-          .group:nth-child(4) { animation-delay: 0.2s; }
-          .group:nth-child(5) { animation-delay: 0.25s; }
-          .group:nth-child(6) { animation-delay: 0.3s; }
-          .group:nth-child(7) { animation-delay: 0.35s; }
-          .group:nth-child(8) { animation-delay: 0.4s; }
-          .group:nth-child(9) { animation-delay: 0.05s; }
-          .group:nth-child(10) { animation-delay: 0.1s; }
-          .group:nth-child(11) { animation-delay: 0.15s; }
-          .group:nth-child(12) { animation-delay: 0.2s; }
-          .group:nth-child(13) { animation-delay: 0.25s; }
-          .group:nth-child(14) { animation-delay: 0.3s; }
-          .group:nth-child(15) { animation-delay: 0.35s; }
-          .group:nth-child(16) { animation-delay: 0.4s; }
-          .group:nth-child(17) { animation-delay: 0.05s; }
-          .group:nth-child(18) { animation-delay: 0.1s; }
-          .group:nth-child(19) { animation-delay: 0.15s; }
-          .group:nth-child(20) { animation-delay: 0.2s; }
-          .group:nth-child(21) { animation-delay: 0.25s; }
-          .group:nth-child(22) { animation-delay: 0.3s; }
-          .group:nth-child(23) { animation-delay: 0.35s; }
-          .group:nth-child(24) { animation-delay: 0.4s; }
+          .partner-card:nth-child(1) { animation-delay: 0.05s; }
+          .partner-card:nth-child(2) { animation-delay: 0.1s; }
+          .partner-card:nth-child(3) { animation-delay: 0.15s; }
+          .partner-card:nth-child(4) { animation-delay: 0.2s; }
+          .partner-card:nth-child(5) { animation-delay: 0.25s; }
+          .partner-card:nth-child(6) { animation-delay: 0.3s; }
+          .partner-card:nth-child(7) { animation-delay: 0.35s; }
+          .partner-card:nth-child(8) { animation-delay: 0.4s; }
+          .partner-card:nth-child(9) { animation-delay: 0.05s; }
+          .partner-card:nth-child(10) { animation-delay: 0.1s; }
+          .partner-card:nth-child(11) { animation-delay: 0.15s; }
+          .partner-card:nth-child(12) { animation-delay: 0.2s; }
+          .partner-card:nth-child(13) { animation-delay: 0.25s; }
+          .partner-card:nth-child(14) { animation-delay: 0.3s; }
+          .partner-card:nth-child(15) { animation-delay: 0.35s; }
+          .partner-card:nth-child(16) { animation-delay: 0.4s; }
+          .partner-card:nth-child(17) { animation-delay: 0.05s; }
+          .partner-card:nth-child(18) { animation-delay: 0.1s; }
+          .partner-card:nth-child(19) { animation-delay: 0.15s; }
+          .partner-card:nth-child(20) { animation-delay: 0.2s; }
+          .partner-card:nth-child(21) { animation-delay: 0.25s; }
+          .partner-card:nth-child(22) { animation-delay: 0.3s; }
+          .partner-card:nth-child(23) { animation-delay: 0.35s; }
+          .partner-card:nth-child(24) { animation-delay: 0.4s; }
           
           @keyframes fadeInUp {
             from {
@@ -295,25 +295,27 @@ function Partenaire() {
           }
           
           @media (max-width: 640px) {
-            .group {
+            .partenaires-marquee .partner-card {
               width: 5rem !important;
               height: 5rem !important;
               padding: 0.75rem !important;
             }
-            .gap-12 { gap: 1.5rem !important; }
+            .partenaires-marquee .gap-12 { gap: 1.5rem !important; }
             
-            .absolute.left-2, .absolute.right-2 {
+            .partenaires-marquee .absolute.left-2,
+            .partenaires-marquee .absolute.right-2 {
               width: 2.5rem !important;
               height: 2.5rem !important;
               padding: 0.5rem !important;
             }
             
-            .absolute.left-2 svg, .absolute.right-2 svg {
+            .partenaires-marquee .absolute.left-2 svg,
+            .partenaires-marquee .absolute.right-2 svg {
               width: 1.25rem !important;
               height: 1.25rem !important;
             }
 
-            .inline-flex.items-center.gap-2.px-5.py-2 {
+            .partenaires-marquee .inline-flex.items-center.gap-2.px-5.py-2 {
               padding: 0.4rem 1rem !important;
               font-size: 0.75rem !important;
             }

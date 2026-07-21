@@ -14,7 +14,7 @@ export default function FAQ() {
   }, [t]);
 
   return (
-    <section id="faq" className="relative my-10 py-5 px-6 bg-lime-300 md:mx-10 mx-4 rounded-3xl text-black overflow-hidden">
+    <section id="faq" className="relative my-10 py-5 px-6 bg-[#00FFFF] md:mx-10 mx-4 rounded-3xl text-black overflow-hidden">
 
       {/* 🌫️ AWWARDS CIRCLES BACKGROUND */}
       <div className="absolute inset-0 -z-10">

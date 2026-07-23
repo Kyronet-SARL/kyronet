@@ -15,6 +15,7 @@
     "services": "Services",
     "projects": "Projects",
     "process": "Process",
+    "clients": "Clients",
     "testimonials": "Testimonials",
     "faq": "FAQ",
     "cta": "Contact us",
@@ -317,6 +318,12 @@
     ],
     "ctaTitle": "Have a similar project in mind?",
     "ctaButton": "Let's talk"
+  },
+  "clients": {
+    "eyebrow": "Our clients",
+    "titleLine1": "Trusted",
+    "titleLine2": "by them",
+    "subtitle": "Institutions and organizations that rely on our IT expertise."
   },
   "testimonials": {
     "eyebrow": "Testimonials",

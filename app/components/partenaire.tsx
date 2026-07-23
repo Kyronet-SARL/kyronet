@@ -223,7 +223,6 @@ function Partenaire() {
 
         {/* Message d'information */}
         <div className="text-xs text-gray-400 flex items-center justify-center gap-2">
-          <span>🖱️</span>
           <span>Double-cliquez sur un logo pour visiter son site officiel</span>
         </div>
       </div>

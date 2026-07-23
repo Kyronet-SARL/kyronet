@@ -46,7 +46,7 @@ export default function ServicesStacked() {
   return (
     <section
       id="services"
-      className="relative bg-lime-300 text-black my-5 py-5 md:mx-10 mx-5 rounded-3xl"
+      className="relative bg-[#00FFFF] text-black my-5 py-5 md:mx-10 mx-5 rounded-3xl"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-20">
 

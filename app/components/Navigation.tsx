@@ -15,6 +15,7 @@ export default function Navigation() {
       { label: t("navigation.services"), id: "services" },
       { label: t("navigation.projects"), id: "projects" },
       { label: t("navigation.process"), id: "process" },
+       { label: t("navigation.clients"), id: "clients" },
       { label: t("navigation.testimonials"), id: "testimonials" },
       { label: t("navigation.faq"), id: "faq" },
     ],

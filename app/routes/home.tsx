@@ -9,6 +9,7 @@ import  Process from "../components/Process";
 import  Project from "../components/project";
 import  ServicesStacked from "../components/Services";
 import  Testimonials from "../components/Testimonials";
+import  Clients from "../components/Clients";
 import Contact from "../components/Contact";
 
 export function meta() {
@@ -29,6 +30,7 @@ export default function Home() {
       <Project />
       <Process />
   
+      <Clients />
       <Testimonials />
       <FAQ />
       <Partenaire />

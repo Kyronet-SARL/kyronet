@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { useState, useRef } from "react";
 
-// Imports des 8 logos
+// Imports des 9 logos
 import dellLogo from "~/asset/partenaires/Dell.jpg";
 import fortinetLogo from "~/asset/partenaires/fortinet.jpeg";
 import kasperskyLogo from "~/asset/partenaires/kaspersky.jpeg";
 import microsoftLogo from "~/asset/partenaires/microsoft.jpeg";
 import netappLogo from "~/asset/partenaires/netapp.jpeg";
 import sophosLogo from "~/asset/partenaires/sophos.jpeg";
+import ciscoLogo from "~/asset/partenaires/cisco.png";
 import tenableLogo from "~/asset/partenaires/tenable.jpeg";
 import veeamLogo from "~/asset/partenaires/veeam.jpeg";
 
@@ -46,6 +47,12 @@ function Partenaire() {
       logo: sophosLogo, 
       color: "#E74A2B",
       url: "https://www.sophos.com"
+    },
+    { 
+      name: "Cisco",
+      logo: ciscoLogo,
+      color: "#1BA0D7",
+      url: "https://www.cisco.com"
     },
     { 
       name: "Tenable", 
@@ -257,22 +264,25 @@ function Partenaire() {
           .partner-card:nth-child(6) { animation-delay: 0.3s; }
           .partner-card:nth-child(7) { animation-delay: 0.35s; }
           .partner-card:nth-child(8) { animation-delay: 0.4s; }
-          .partner-card:nth-child(9) { animation-delay: 0.05s; }
-          .partner-card:nth-child(10) { animation-delay: 0.1s; }
-          .partner-card:nth-child(11) { animation-delay: 0.15s; }
-          .partner-card:nth-child(12) { animation-delay: 0.2s; }
-          .partner-card:nth-child(13) { animation-delay: 0.25s; }
-          .partner-card:nth-child(14) { animation-delay: 0.3s; }
-          .partner-card:nth-child(15) { animation-delay: 0.35s; }
-          .partner-card:nth-child(16) { animation-delay: 0.4s; }
-          .partner-card:nth-child(17) { animation-delay: 0.05s; }
-          .partner-card:nth-child(18) { animation-delay: 0.1s; }
-          .partner-card:nth-child(19) { animation-delay: 0.15s; }
-          .partner-card:nth-child(20) { animation-delay: 0.2s; }
-          .partner-card:nth-child(21) { animation-delay: 0.25s; }
-          .partner-card:nth-child(22) { animation-delay: 0.3s; }
-          .partner-card:nth-child(23) { animation-delay: 0.35s; }
-          .partner-card:nth-child(24) { animation-delay: 0.4s; }
+          .partner-card:nth-child(9) { animation-delay: 0.45s; }
+          .partner-card:nth-child(10) { animation-delay: 0.05s; }
+          .partner-card:nth-child(11) { animation-delay: 0.1s; }
+          .partner-card:nth-child(12) { animation-delay: 0.15s; }
+          .partner-card:nth-child(13) { animation-delay: 0.2s; }
+          .partner-card:nth-child(14) { animation-delay: 0.25s; }
+          .partner-card:nth-child(15) { animation-delay: 0.3s; }
+          .partner-card:nth-child(16) { animation-delay: 0.35s; }
+          .partner-card:nth-child(17) { animation-delay: 0.4s; }
+          .partner-card:nth-child(18) { animation-delay: 0.45s; }
+          .partner-card:nth-child(19) { animation-delay: 0.05s; }
+          .partner-card:nth-child(20) { animation-delay: 0.1s; }
+          .partner-card:nth-child(21) { animation-delay: 0.15s; }
+          .partner-card:nth-child(22) { animation-delay: 0.2s; }
+          .partner-card:nth-child(23) { animation-delay: 0.25s; }
+          .partner-card:nth-child(24) { animation-delay: 0.3s; }
+          .partner-card:nth-child(25) { animation-delay: 0.35s; }
+          .partner-card:nth-child(26) { animation-delay: 0.4s; }
+          .partner-card:nth-child(27) { animation-delay: 0.45s; }
           
           @keyframes fadeInUp {
             from {

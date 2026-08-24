@@ -227,11 +227,6 @@ function Partenaire() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </button>
-
-        {/* Message d'information */}
-        <div className="text-xs text-gray-400 flex items-center justify-center gap-2">
-          <span>Double-cliquez sur un logo pour visiter son site officiel</span>
-        </div>
       </div>
 
       <style>
